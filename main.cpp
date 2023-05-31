@@ -2,6 +2,7 @@
 #include <GLFW/glfw3.h>
 #include "tigl.h"
 #include <glm/gtc/matrix_transform.hpp>
+#include <graphics/model-loader/ModelLoader.h>
 using tigl::Vertex;
 
 #pragma comment(lib, "glfw3.lib")
