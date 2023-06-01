@@ -5,6 +5,7 @@
 #include <iostream>
 #include <graphics/OrbitalCamera.h>
 #include <graphics/models/model-loader/ModelLoader.h>
+#include <graphics/models/model-loader/ObjParser.h>
 using tigl::Vertex;
 
 #pragma comment(lib, "glfw3.lib")
@@ -91,6 +92,9 @@ void init()
 	vertices.push_back(tigl::Vertex::PC(glm::vec3(1, 0, 0), glm::vec4(0, 1, 0, 1)));
 	vertices.push_back(tigl::Vertex::PC(glm::vec3(0, 1, 0), glm::vec4(0, 0, 1, 1)));
 	testVBO = tigl::createVbo(vertices);
+
+	ObjParser parser;
+	parser.parseModel("scarecrow/scarecrow.obj");
 }
 
 

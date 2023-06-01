@@ -7,6 +7,6 @@ public:
 	ObjParser();
 	~ObjParser() = default;
 
-	virtual std::vector<Mesh> parseModel(const std::string& filePath) const override;
+	virtual std::vector<Mesh> parseModel(const std::string& assetPath) const override;
 };
 

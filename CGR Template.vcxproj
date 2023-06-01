@@ -156,14 +156,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="graphics\model-loader\ModelLoader.cpp" />
+    <ClCompile Include="graphics\models\model-loader\ModelLoader.cpp" />
     <ClCompile Include="graphics\OrbitalCamera.cpp" />
+    <ClCompile Include="graphics\models\Model.cpp" />
+    <ClCompile Include="graphics\models\model-loader\ObjParser.cpp" />
+    <ClCompile Include="graphics\models\model-loader\Mesh.cpp" />
     <ClCompile Include="tigl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="graphics\Camera.h" />
-    <ClInclude Include="graphics\model-loader\ModelLoader.h" />
+    <ClInclude Include="graphics\models\model-loader\ModelLoader.h" />
     <ClInclude Include="graphics\OrbitalCamera.h" />
+    <ClInclude Include="graphics\models\Model.h" />
+    <ClInclude Include="graphics\models\model-loader\ModelParser.h" />
+    <ClInclude Include="graphics\models\model-loader\ObjParser.h" />
+    <ClInclude Include="graphics\models\model-loader\Mesh.h" />
     <ClInclude Include="tigl.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
