@@ -57,6 +57,8 @@ int main(void)
 
 void init()
 {
+    glClearColor(0.3f, 0.4f, 0.6f, 1.0f);
+
     glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
     {
         if (key == GLFW_KEY_ESCAPE)
@@ -102,7 +104,7 @@ void update()
 void draw()
 {
     glfwGetWindowSize(window, &screenWidth, &screenHeight);
-    glClearColor(0.3f, 0.4f, 0.6f, 1.0f);
+    glViewport(0, 0, screenWidth, screenHeight);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glm::mat4 projectionMatrix = glm::perspective(glm::radians(80.0f), screenWidth / (float)screenHeight, 0.01f, 100.0f);
