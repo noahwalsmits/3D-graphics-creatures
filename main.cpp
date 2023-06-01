@@ -2,11 +2,10 @@
 #include <GLFW/glfw3.h>
 #include "tigl.h"
 #include <glm/gtc/matrix_transform.hpp>
-#include <graphics/model-loader/ModelLoader.h>
-using tigl::Vertex;
-
 #include <iostream>
 #include <graphics/OrbitalCamera.h>
+#include <graphics/models/model-loader/ModelLoader.h>
+using tigl::Vertex;
 
 #pragma comment(lib, "glfw3.lib")
 #pragma comment(lib, "glew32s.lib")
