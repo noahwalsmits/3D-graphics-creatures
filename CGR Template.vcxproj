@@ -157,10 +157,13 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="graphics\model-loader\ModelLoader.cpp" />
+    <ClCompile Include="graphics\OrbitalCamera.cpp" />
     <ClCompile Include="tigl.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="graphics\Camera.h" />
     <ClInclude Include="graphics\model-loader\ModelLoader.h" />
+    <ClInclude Include="graphics\OrbitalCamera.h" />
     <ClInclude Include="tigl.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
