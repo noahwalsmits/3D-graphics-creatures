@@ -4,10 +4,7 @@
 class OrbitalCamera : public Camera
 {
 public:
-	OrbitalCamera() : Camera() 
-	{
-		this->updateViewingAngle();
-	}
+	OrbitalCamera(glm::vec3 target);
 	~OrbitalCamera() = default;
 
 	virtual glm::mat4 getViewMatrix() const override;
@@ -20,7 +17,7 @@ private:
 	static constexpr float MAX_PITCH = 89.0f;
 
 	const glm::vec3 worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
-	glm::vec3 target = glm::vec3(0.0f, 0.0f, 0.0f); //reference to the position the camera is looking at
+	glm::vec3 target; //the position the camera is looking at
 	glm::vec3 position; //the current position of the camera
 	float distance = 2.0f; //distance between the camera and target positions
 	float yaw = -90.0f;

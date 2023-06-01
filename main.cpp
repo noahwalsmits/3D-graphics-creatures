@@ -14,6 +14,7 @@ using tigl::Vertex;
 
 GLFWwindow* window;
 Camera* camera;
+int screenWidth, screenHeight;
 double lastTime;
 double lastMouseX = 0.0;
 double lastMouseY = 0.0;
@@ -65,12 +66,12 @@ void init()
     lastTime = glfwGetTime();
 
     //setup mouse movement
-    //glfwGetWindowSize(window, &screenSize.x, &screenSize.y);
-    //lastMouseX = screenSize.x / 2;
-    //lastMouseY = screenSize.y / 2;
+    glfwGetWindowSize(window, &screenWidth, &screenHeight);
+    lastMouseX = screenWidth / 2;
+    lastMouseY = screenHeight / 2;
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-    camera = new OrbitalCamera();
+    camera = new OrbitalCamera(glm::vec3(0.0f, 0.0f, 0.0f));
 
     int i = 10;
     int* iptr = &i;
@@ -100,11 +101,17 @@ void update()
 
 void draw()
 {
+    glfwGetWindowSize(window, &screenWidth, &screenHeight);
     glClearColor(0.3f, 0.4f, 0.6f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    tigl::shader.get()->setViewMatrix(camera->getViewMatrix());
-    tigl::shader.get()->setModelMatrix(glm::mat4());
+    glm::mat4 projectionMatrix = glm::perspective(glm::radians(80.0f), screenWidth / (float)screenHeight, 0.01f, 100.0f);
+    glm::mat4 viewMatrix = camera->getViewMatrix();
+    glm::mat4 modelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+
+    tigl::shader.get()->setProjectionMatrix(projectionMatrix);
+    tigl::shader.get()->setViewMatrix(viewMatrix);
+    tigl::shader.get()->setModelMatrix(modelMatrix);
 
     tigl::begin(GL_TRIANGLES);
     tigl::addVertex(tigl::Vertex::PC(glm::vec3(-1, 0, 0), glm::vec4(1, 0, 0, 1)));

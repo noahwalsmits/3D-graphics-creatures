@@ -1,6 +1,12 @@
 #include "OrbitalCamera.h"
 #include <glm/gtc/matrix_transform.hpp>
 
+OrbitalCamera::OrbitalCamera(glm::vec3 target) : Camera()
+{
+	this->target = target;
+	this->updateViewingAngle();
+}
+
 glm::mat4 OrbitalCamera::getViewMatrix() const
 {
 	return glm::lookAt(this->position, this->target, this->worldUp);
