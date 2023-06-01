@@ -86,15 +86,9 @@ void init()
 	std::cout << "value: " << *smart_ptr.get() << ", uses: " << smart_ptr.use_count() << std::endl;
 	std::cout << "value: " << *smart_ptr2.get() << ", uses: " << smart_ptr2.use_count() << std::endl;
 
-	tigl::shader.get()->enableColor(true);
-	std::vector<tigl::Vertex> vertices;
-	vertices.push_back(tigl::Vertex::PC(glm::vec3(-1, 0, 0), glm::vec4(1, 0, 0, 1)));
-	vertices.push_back(tigl::Vertex::PC(glm::vec3(1, 0, 0), glm::vec4(0, 1, 0, 1)));
-	vertices.push_back(tigl::Vertex::PC(glm::vec3(0, 1, 0), glm::vec4(0, 0, 1, 1)));
-	testVBO = tigl::createVbo(vertices);
-
+	//tigl::shader.get()->enableColor(true);
 	ObjParser parser;
-	parser.parseModel("scarecrow/scarecrow.obj");
+	testVBO = parser.parseModel("scarecrow/scarecrow.obj")[0].createVBO();
 }
 
 
@@ -129,11 +123,6 @@ void draw()
 	tigl::shader.get()->setModelMatrix(modelMatrix);
 
 	/*TEST CODE*/
-	//tigl::begin(GL_TRIANGLES);
-	//tigl::addVertex(tigl::Vertex::PC(glm::vec3(-1, 0, 0), glm::vec4(1, 0, 0, 1)));
-	//tigl::addVertex(tigl::Vertex::PC(glm::vec3(1, 0, 0), glm::vec4(0, 1, 0, 1)));
-	//tigl::addVertex(tigl::Vertex::PC(glm::vec3(0, 1, 0), glm::vec4(0, 0, 1, 1)));
-	//tigl::end();
 	tigl::drawVertices(GL_TRIANGLES, testVBO);
 }
 
