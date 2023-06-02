@@ -21,10 +21,12 @@ std::vector<Mesh> ObjParser::parseModel(const std::string& assetPath) const
 		throw std::runtime_error("model file " + filePath + " could not be opened");
 	}
 
-	std::vector<tigl::Vertex> indexed_vertices;
 	std::vector<glm::vec3> temp_vertices;
 	std::vector<glm::vec2> temp_uvs;
 	std::vector<glm::vec3> temp_normals;
+	std::vector<tigl::Vertex> indexed_vertices;
+	std::vector<Material*> loadedMaterials;
+	Material* currentMaterial = nullptr;
 
 	while (!objFile.eof())
 	{
@@ -59,17 +61,33 @@ std::vector<Mesh> ObjParser::parseModel(const std::string& assetPath) const
 		else if (arguments[0] == "mtllib") //load material
 		{
 			std::string directoryPath = filePath.substr(0, filePath.find_last_of("/"));
-			readMaterial(directoryPath + "/" + arguments[1]);
+			readMaterials(directoryPath + "/" + arguments[1], loadedMaterials);
 		}
-		else if (arguments[0] == "usemtl") //
+		else if (arguments[0] == "usemtl") //use material
 		{
-			//TODO all faces after this command will use the specified material
-			//so here we add all previously read faces into a mesh with the previously read material
+			//add all previously read faces into a mesh with the previously read material
+			if (indexed_vertices.size() > 0 && currentMaterial)
+			{
+				meshes.push_back(Mesh(indexed_vertices, currentMaterial));
+				indexed_vertices.clear();
+			}
+			//set new current material
+			for (Material* material : loadedMaterials)
+			{
+				if (material->name == arguments[1])
+				{
+					currentMaterial = material;
+				}
+			}
 		}
 	}
-	//TODO after we are done reading we need to add the remaining faces into a mesh with the last material
+	//after we are done reading we need to add the remaining faces into a mesh with the last material
+	if (indexed_vertices.size() > 0 && currentMaterial)
+	{
+		meshes.push_back(Mesh(indexed_vertices, currentMaterial));
+		indexed_vertices.clear();
+	}
 
-	meshes.push_back(Mesh(indexed_vertices));
 	return meshes;
 }
 
@@ -88,7 +106,7 @@ std::vector<std::string> ObjParser::splitArguments(std::string line, const std::
 	return arguments;
 }
 
-Material ObjParser::readMaterial(const std::string& filePath) const
+void ObjParser::readMaterials(const std::string& filePath, std::vector<Material*>& loadedMaterials) const
 {
 	std::cout << "\tloading material " << filePath << std::endl;
 	std::ifstream mtlFile(filePath.c_str());
@@ -98,7 +116,6 @@ Material ObjParser::readMaterial(const std::string& filePath) const
 	}
 
 	Material* currentMaterial = nullptr;
-	std::vector<Material*> materials;
 
 	while (!mtlFile.eof())
 	{
@@ -110,7 +127,7 @@ Material ObjParser::readMaterial(const std::string& filePath) const
 		{
 			if (currentMaterial)
 			{
-				materials.push_back(currentMaterial);
+				loadedMaterials.push_back(currentMaterial);
 			}
 			currentMaterial = new Material();
 			currentMaterial->name = arguments[1];
@@ -120,7 +137,11 @@ Material ObjParser::readMaterial(const std::string& filePath) const
 			std::string directoryPath = filePath.substr(0, filePath.find_last_of("/"));
 			currentMaterial->texture = new Texture(directoryPath + "/" + arguments[1]);
 		}
+		//TODO other parameter types
 	}
-
-	return Material();
+	//add the last material after we are done reading
+	if (currentMaterial)
+	{
+		loadedMaterials.push_back(currentMaterial);
+	}
 }

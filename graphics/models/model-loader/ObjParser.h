@@ -14,6 +14,10 @@ public:
 
 private:
 	std::vector<std::string> splitArguments(std::string line, const std::string& delimiter) const;
-	Material readMaterial(const std::string& filePath) const;
+
+	/**
+	 * Reads the materials from an mtl file and adds them to the provided vector.
+	 */
+	void readMaterials(const std::string& filePath, std::vector<Material*>& loadedMaterials) const;
 };
 
