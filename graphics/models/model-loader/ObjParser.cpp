@@ -118,7 +118,6 @@ Material ObjParser::readMaterial(const std::string& filePath) const
 		else if (arguments[0] == "map_Kd") //load diffuse texture
 		{
 			std::string directoryPath = filePath.substr(0, filePath.find_last_of("/"));
-			std::cout << "\t\tloading texture " << filePath << std::endl;
 			currentMaterial->texture = new Texture(directoryPath + "/" + arguments[1]);
 		}
 	}

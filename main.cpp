@@ -87,6 +87,7 @@ void init()
 	std::cout << "value: " << *smart_ptr2.get() << ", uses: " << smart_ptr2.use_count() << std::endl;
 
 	//tigl::shader.get()->enableColor(true);
+	tigl::shader.get()->enableTexture(true);
 	ObjParser parser;
 	testVBO = parser.parseModel("scarecrow/scarecrow.obj")[0].createVBO();
 }
