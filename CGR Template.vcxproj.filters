@@ -33,7 +33,7 @@
     <ClCompile Include="graphics\models\model-loader\ObjParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="graphics\models\model-loader\Mesh.cpp">
+    <ClCompile Include="graphics\models\Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="graphics\models\Material.cpp">
@@ -65,7 +65,7 @@
     <ClInclude Include="graphics\models\model-loader\ObjParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="graphics\models\model-loader\Mesh.h">
+    <ClInclude Include="graphics\models\Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="graphics\models\Material.h">

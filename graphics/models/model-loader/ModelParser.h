@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
-#include <graphics/models/model-loader/Mesh.h>
+#include <graphics/models/Mesh.h>
 
 class ModelParser
 {
