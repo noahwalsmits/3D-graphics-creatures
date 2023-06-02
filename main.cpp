@@ -19,7 +19,7 @@ double lastTime;
 double lastMouseX = 0.0;
 double lastMouseY = 0.0;
 
-tigl::VBO* testVBO;
+Mesh* mesh;
 
 void init();
 void update();
@@ -90,8 +90,8 @@ void init()
 	//tigl::shader.get()->enableColor(true);
 	tigl::shader.get()->enableTexture(true);
 	ObjParser parser;
-	testVBO = parser.parseModel("scarecrow/scarecrow.obj")[0].createVBO();
-	//testVBO = parser.parseModel("Egg 1/kart_YS_b.obj")[0].createVBO();
+	mesh = parser.parseModel("scarecrow/scarecrow.obj")[0];
+	//mesh = parser.parseModel("Egg 1/kart_YS_b.obj")[0];
 }
 
 
@@ -126,7 +126,7 @@ void draw()
 	tigl::shader.get()->setModelMatrix(modelMatrix);
 
 	/*TEST CODE*/
-	tigl::drawVertices(GL_TRIANGLES, testVBO);
+	mesh->draw();
 }
 
 void exit()

@@ -6,15 +6,15 @@
 class Mesh
 {
 public:
-	Mesh(std::vector<tigl::Vertex> vertices, Material* material);
-	//TODO store VBO instead of vertices
-	//TODO add draw function
-	//TODO create destructor
+	Mesh(const std::vector<tigl::Vertex>& vertices, Material* material);
+	//TODO store shape type here
+	//TODO support missing values for obj faces
+	//TODO create destructor that also frees all resources from OpenGL
+	//TODO fix the copy constructors so the model can get a working list of these
 
-	tigl::VBO* createVBO();
+	void draw() const;
 
 private:
-	std::vector<tigl::Vertex> vertices;
+	tigl::VBO* vbo;
 	Material* material;
 };
-
