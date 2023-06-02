@@ -8,8 +8,7 @@ Texture::Texture(const std::string& filePath)
 {
 	std::cout << "\t\tloading texture " << filePath << std::endl;
 
-	glGenTextures(1, &this->id);
-
+	stbi_set_flip_vertically_on_load(true);
 	int width, height, nrComponents;
 	unsigned char* data = stbi_load(filePath.c_str(), &width, &height, &nrComponents, 0);
 	if (data)
@@ -31,6 +30,7 @@ Texture::Texture(const std::string& filePath)
 			break;
 		}
 
+		glGenTextures(1, &this->id);
 		glBindTexture(GL_TEXTURE_2D, this->id);
 		glTexImage2D(GL_TEXTURE_2D, 0, imageFormat, width, height, 0, imageFormat, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);

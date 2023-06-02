@@ -59,6 +59,7 @@ int main(void)
 
 void init()
 {
+	glEnable(GL_DEPTH_TEST);
 	glClearColor(0.3f, 0.4f, 0.6f, 1.0f);
 
 	glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -75,7 +76,7 @@ void init()
 	lastMouseY = screenHeight / 2;
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-	camera = new OrbitalCamera(glm::vec3(0.0f, 0.0f, 0.0f));
+	camera = new OrbitalCamera(glm::vec3(0.0f, 5.0f, 0.0f));
 
 	/*TEST CODE*/
 	int i = 10;
@@ -90,6 +91,7 @@ void init()
 	tigl::shader.get()->enableTexture(true);
 	ObjParser parser;
 	testVBO = parser.parseModel("scarecrow/scarecrow.obj")[0].createVBO();
+	//testVBO = parser.parseModel("Egg 1/kart_YS_b.obj")[0].createVBO();
 }
 
 
