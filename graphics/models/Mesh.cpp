@@ -1,13 +1,14 @@
 #include "Mesh.h"
 
-Mesh::Mesh(const std::vector<tigl::Vertex>& vertices, Material* material)
+Mesh::Mesh(const std::vector<tigl::Vertex>& vertices, Material* material, GLenum shape)
 {
 	this->vbo = tigl::createVbo(vertices);
 	this->material = material;
+	this->shape = shape;
 }
 
 void Mesh::draw() const
 {
 	this->material->texture->bind();
-	tigl::drawVertices(GL_TRIANGLES, this->vbo);
+	tigl::drawVertices(this->shape, this->vbo);
 }
