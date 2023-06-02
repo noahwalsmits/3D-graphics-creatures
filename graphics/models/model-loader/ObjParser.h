@@ -14,6 +14,6 @@ public:
 
 private:
 	std::vector<std::string> splitArguments(std::string line, const std::string& delimiter) const;
-	Material readMaterial(const std::string& filePath);
+	Material readMaterial(const std::string& filePath) const;
 };
 

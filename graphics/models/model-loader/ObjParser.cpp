@@ -12,6 +12,7 @@ ObjParser::ObjParser() : ModelParser()
 std::vector<Mesh> ObjParser::parseModel(const std::string& assetPath) const
 {
 	std::string filePath = "assets/" + assetPath;
+	std::cout << "loading model " << filePath << std::endl;
 	std::vector<Mesh> meshes;
 
 	std::ifstream objFile(filePath.c_str());
@@ -57,7 +58,8 @@ std::vector<Mesh> ObjParser::parseModel(const std::string& assetPath) const
 		}
 		else if (arguments[0] == "mtllib") //load material
 		{
-			//TODO
+			std::string directoryPath = filePath.substr(0, filePath.find_last_of("/"));
+			readMaterial(directoryPath + "/" + arguments[1]);
 		}
 		else if (arguments[0] == "usemtl") //
 		{
@@ -86,7 +88,40 @@ std::vector<std::string> ObjParser::splitArguments(std::string line, const std::
 	return arguments;
 }
 
-Material ObjParser::readMaterial(const std::string& filePath)
+Material ObjParser::readMaterial(const std::string& filePath) const
 {
+	std::cout << "\tloading material " << filePath << std::endl;
+	std::ifstream mtlFile(filePath.c_str());
+	if (!mtlFile.is_open())
+	{
+		throw std::runtime_error("material file " + filePath + " could not be opened");
+	}
+
+	Material* currentMaterial = nullptr;
+	std::vector<Material*> materials;
+
+	while (!mtlFile.eof())
+	{
+		std::string line;
+		std::getline(mtlFile, line);
+		std::vector<std::string> arguments = splitArguments(line, " ");
+
+		if (arguments[0] == "newmtl") //create new material
+		{
+			if (currentMaterial)
+			{
+				materials.push_back(currentMaterial);
+			}
+			currentMaterial = new Material();
+			currentMaterial->name = arguments[1];
+		}
+		else if (arguments[0] == "map_Kd") //load diffuse texture
+		{
+			std::string directoryPath = filePath.substr(0, filePath.find_last_of("/"));
+			std::cout << "\t\tloading texture " << filePath << std::endl;
+			currentMaterial->texture = new Texture(directoryPath + "/" + arguments[1]);
+		}
+	}
+
 	return Material();
 }
