@@ -55,7 +55,17 @@ std::vector<Mesh> ObjParser::parseModel(const std::string& assetPath) const
 				indexed_vertices.push_back(tigl::Vertex::PTN(temp_vertices[vertexIndex], temp_uvs[uvIndex], temp_normals[normalIndex]));
 			}
 		}
+		else if (arguments[0] == "mtllib") //load material
+		{
+			//TODO
+		}
+		else if (arguments[0] == "usemtl") //
+		{
+			//TODO all faces after this command will use the specified material
+			//so here we add all previously read faces into a mesh with the previously read material
+		}
 	}
+	//TODO after we are done reading we need to add the remaining faces into a mesh with the last material
 
 	meshes.push_back(Mesh(indexed_vertices));
 	return meshes;
@@ -74,4 +84,9 @@ std::vector<std::string> ObjParser::splitArguments(std::string line, const std::
 	arguments.push_back(line);
 
 	return arguments;
+}
+
+Material ObjParser::readMaterial(const std::string& filePath)
+{
+	return Material();
 }

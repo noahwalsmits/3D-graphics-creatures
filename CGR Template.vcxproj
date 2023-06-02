@@ -161,6 +161,8 @@
     <ClCompile Include="graphics\models\Model.cpp" />
     <ClCompile Include="graphics\models\model-loader\ObjParser.cpp" />
     <ClCompile Include="graphics\models\model-loader\Mesh.cpp" />
+    <ClCompile Include="graphics\models\Material.cpp" />
+    <ClCompile Include="graphics\models\Texture.cpp" />
     <ClCompile Include="tigl.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -171,6 +173,8 @@
     <ClInclude Include="graphics\models\model-loader\ModelParser.h" />
     <ClInclude Include="graphics\models\model-loader\ObjParser.h" />
     <ClInclude Include="graphics\models\model-loader\Mesh.h" />
+    <ClInclude Include="graphics\models\Material.h" />
+    <ClInclude Include="graphics\models\Texture.h" />
     <ClInclude Include="tigl.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

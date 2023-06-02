@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <graphics/models/model-loader/ModelParser.h>
+#include <graphics/models/Material.h>
 
 class ObjParser : public ModelParser
 {
@@ -13,5 +14,6 @@ public:
 
 private:
 	std::vector<std::string> splitArguments(std::string line, const std::string& delimiter) const;
+	Material readMaterial(const std::string& filePath);
 };
 
