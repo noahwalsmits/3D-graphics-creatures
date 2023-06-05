@@ -9,12 +9,14 @@ class ModelLoader
 {
 public:
 	ModelLoader();
+	~ModelLoader();
 
 	MeshGroup loadModel(const std::string& filePath);
 
 	//TODO check all shared pointers for usage count and remove if we're the last ones
 
 private:
-	std::map<std::string, ModelParser*> fileParsers;
+	std::map<std::string, ModelParser*> fileParsers; //<file extention, appropriate parser>
+	std::map<std::string, std::shared_ptr<MeshGroup>> loadedModels; //<file path, appropriate meshgroup>
 };
 
