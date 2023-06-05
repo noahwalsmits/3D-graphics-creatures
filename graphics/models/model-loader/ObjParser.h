@@ -10,7 +10,7 @@ public:
 	ObjParser();
 	~ObjParser() = default;
 
-	std::vector<Mesh*> parseModel(const std::string& assetPath) const override;
+	std::vector<Mesh> parseModel(const std::string& assetPath) const override;
 
 private:
 	std::vector<std::string> splitArguments(std::string line, const std::string& delimiter) const;

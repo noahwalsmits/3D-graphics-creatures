@@ -19,7 +19,7 @@ double lastTime;
 double lastMouseX = 0.0;
 double lastMouseY = 0.0;
 
-std::vector<Mesh*> meshes;
+std::vector<Mesh> meshes;
 
 void init();
 void update();
@@ -126,9 +126,9 @@ void draw()
 	tigl::shader.get()->setModelMatrix(modelMatrix);
 
 	/*TEST CODE*/
-	for (const Mesh* mesh : meshes) 
+	for (const Mesh& mesh : meshes) 
 	{
-		mesh->draw();
+		mesh.draw();
 	}
 }
 
