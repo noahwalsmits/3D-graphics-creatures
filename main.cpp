@@ -76,19 +76,11 @@ void init()
 	lastMouseY = screenHeight / 2;
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-	camera = new OrbitalCamera(glm::vec3(0.0f, 5.0f, 0.0f));
+	camera = new OrbitalCamera(glm::vec3(0.0f, 0.0f, 0.0f));
 
 	/*TEST CODE*/
-	int i = 10;
-	int* iptr = &i;
-	//std::shared_ptr<int> smart_ptr(iptr); //crashes because the original value is deleted
-	std::shared_ptr<int> smart_ptr = std::make_shared<int>(10);
-	std::shared_ptr<int> smart_ptr2 = smart_ptr;
-	std::cout << "value: " << *smart_ptr.get() << ", uses: " << smart_ptr.use_count() << std::endl;
-	std::cout << "value: " << *smart_ptr2.get() << ", uses: " << smart_ptr2.use_count() << std::endl;
-
-	//tigl::shader.get()->enableColor(true);
-	tigl::shader.get()->enableTexture(true);
+	//tigl::shader->enableColor(true);
+	tigl::shader->enableTexture(true);
 	models.push_back(Model("Egg 1/kart_YS_b.obj", glm::vec3(0.0f, 0.0f, 0.0f)));
 }
 
@@ -117,13 +109,11 @@ void draw()
 
 	glm::mat4 projectionMatrix = glm::perspective(glm::radians(80.0f), screenWidth / (float)screenHeight, 0.01f, 100.0f);
 	glm::mat4 viewMatrix = camera->getViewMatrix();
-	glm::mat4 modelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 
 	tigl::shader.get()->setProjectionMatrix(projectionMatrix);
 	tigl::shader.get()->setViewMatrix(viewMatrix);
-	tigl::shader.get()->setModelMatrix(modelMatrix);
+	//model matrix is set by each model
 
-	/*TEST CODE*/
 	for (const Model& model : models) 
 	{
 		model.draw(*tigl::shader);
