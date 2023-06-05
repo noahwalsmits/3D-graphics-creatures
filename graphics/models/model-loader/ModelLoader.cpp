@@ -18,12 +18,12 @@ ModelLoader::~ModelLoader()
 	}
 }
 
-MeshGroup ModelLoader::loadModel(const std::string& filePath)
+std::shared_ptr <MeshGroup> ModelLoader::loadModel(const std::string& filePath)
 {
 	//check if we already have it loaded
 	if (this->loadedModels.count(filePath) == 1)
 	{
-		return *this->loadedModels[filePath]; //TODO return shared pointer instead
+		return this->loadedModels[filePath];
 	}
 
 	//check filetype for parser
@@ -41,5 +41,5 @@ MeshGroup ModelLoader::loadModel(const std::string& filePath)
 	//parse model and keep it saved
 	MeshGroup meshGroup = MeshGroup(this->fileParsers[fileExtention]->parseModel(filePath));
 	this->loadedModels.emplace(filePath, std::make_shared<MeshGroup>(meshGroup));
-	return meshGroup;
+	return this->loadedModels[filePath];
 }

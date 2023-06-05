@@ -9,6 +9,7 @@ public:
 
 	void draw() const;
 
+	//TODO implement Model
 	//TODO create destructor that also frees all resources from OpenGL
 
 private:

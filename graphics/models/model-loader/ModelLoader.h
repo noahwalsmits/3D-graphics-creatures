@@ -11,7 +11,7 @@ public:
 	ModelLoader();
 	~ModelLoader();
 
-	MeshGroup loadModel(const std::string& filePath);
+	std::shared_ptr<MeshGroup> loadModel(const std::string& filePath);
 
 	//TODO check all shared pointers for usage count and remove if we're the last ones
 
