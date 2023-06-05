@@ -21,10 +21,10 @@ std::vector<Mesh*> ObjParser::parseModel(const std::string& assetPath) const
 		throw std::runtime_error("model file " + filePath + " could not be opened");
 	}
 
-	std::vector<glm::vec3> temp_vertices;
-	std::vector<glm::vec2> temp_uvs;
-	std::vector<glm::vec3> temp_normals;
-	std::vector<tigl::Vertex> indexed_vertices;
+	std::vector<glm::vec3> readPositions;
+	std::vector<glm::vec2> readTexCoords;
+	std::vector<glm::vec3> readNormals;
+	std::vector<tigl::Vertex> readVertices;
 	std::vector<Material*> loadedMaterials;
 	Material* currentMaterial = nullptr;
 
@@ -34,23 +34,23 @@ std::vector<Mesh*> ObjParser::parseModel(const std::string& assetPath) const
 		std::getline(objFile, line);
 		std::vector<std::string> arguments = splitArguments(line, " ");
 		
-		if (arguments[0] == "v") //read vertex
+		if (arguments[0] == "v") //read position
 		{
-			temp_vertices.push_back(glm::vec3(std::stof(arguments[1]), std::stof(arguments[2]), std::stof(arguments[3])));
+			readPositions.push_back(glm::vec3(std::stof(arguments[1]), std::stof(arguments[2]), std::stof(arguments[3])));
 		}
-		else if (arguments[0] == "vt") //read uv
+		else if (arguments[0] == "vt") //read texture coordinates
 		{
-			temp_uvs.push_back(glm::vec2(std::stof(arguments[1]), std::stof(arguments[2])));
+			readTexCoords.push_back(glm::vec2(std::stof(arguments[1]), std::stof(arguments[2])));
 		}
 		else if (arguments[0] == "vn") //read normal
 		{
-			temp_normals.push_back(glm::vec3(std::stof(arguments[1]), std::stof(arguments[2]), std::stof(arguments[3])));
+			readNormals.push_back(glm::vec3(std::stof(arguments[1]), std::stof(arguments[2]), std::stof(arguments[3])));
 		}
 		else if (arguments[0] == "f") //read face
 		{
 			for (int i = 1; i < arguments.size(); i++) //read each vertex
 			{
-				indexed_vertices.push_back(parseVertex(arguments[i], temp_vertices, temp_uvs, temp_normals));
+				readVertices.push_back(parseVertex(arguments[i], readPositions, readTexCoords, readNormals));
 			}
 		}
 		else if (arguments[0] == "mtllib") //load material
@@ -61,10 +61,10 @@ std::vector<Mesh*> ObjParser::parseModel(const std::string& assetPath) const
 		else if (arguments[0] == "usemtl") //use material
 		{
 			//add all previously read faces into a mesh with the previously read material
-			if (indexed_vertices.size() > 0 && currentMaterial)
+			if (readVertices.size() > 0 && currentMaterial)
 			{
-				meshes.push_back(new Mesh(indexed_vertices, currentMaterial));
-				indexed_vertices.clear();
+				meshes.push_back(new Mesh(readVertices, currentMaterial));
+				readVertices.clear();
 			}
 			//set new current material
 			for (Material* material : loadedMaterials)
@@ -77,10 +77,10 @@ std::vector<Mesh*> ObjParser::parseModel(const std::string& assetPath) const
 		}
 	}
 	//after we are done reading we need to add the remaining faces into a mesh with the last material
-	if (indexed_vertices.size() > 0 && currentMaterial)
+	if (readVertices.size() > 0 && currentMaterial)
 	{
-		meshes.push_back(new Mesh(indexed_vertices, currentMaterial));
-		indexed_vertices.clear();
+		meshes.push_back(new Mesh(readVertices, currentMaterial));
+		readVertices.clear();
 	}
 
 	return meshes;
