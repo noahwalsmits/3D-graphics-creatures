@@ -48,14 +48,9 @@ std::vector<Mesh*> ObjParser::parseModel(const std::string& assetPath) const
 		}
 		else if (arguments[0] == "f") //read face
 		{
-			for (int i = 1; i < arguments.size(); i++)
+			for (int i = 1; i < arguments.size(); i++) //read each vertex
 			{
-				std::vector<std::string> faceIndices = splitArguments(arguments[i], "/"); //split face to get vertex/uv/normal
-				assert(faceIndices.size() == 3); //TODO support other format
-				int vertexIndex = std::stoi(faceIndices[0]) - 1;
-				int uvIndex = std::stoi(faceIndices[1]) - 1;
-				int normalIndex = std::stoi(faceIndices[2]) - 1;
-				indexed_vertices.push_back(tigl::Vertex::PTN(temp_vertices[vertexIndex], temp_uvs[uvIndex], temp_normals[normalIndex]));
+				indexed_vertices.push_back(parseVertex(arguments[i], temp_vertices, temp_uvs, temp_normals));
 			}
 		}
 		else if (arguments[0] == "mtllib") //load material
@@ -104,6 +99,43 @@ std::vector<std::string> ObjParser::splitArguments(std::string line, const std::
 	arguments.push_back(line);
 
 	return arguments;
+}
+
+tigl::Vertex ObjParser::parseVertex(const std::string& vertexIndices, const std::vector<glm::vec3>& positions, const std::vector<glm::vec2>& textureCoords, const std::vector<glm::vec3>& normals) const
+{
+	std::vector<std::string> arguments = splitArguments(vertexIndices, "/"); //split face to get vertex/uv/normal
+	int vertexIndex;
+	int uvIndex;
+	int normalIndex;
+
+	if (arguments.size() == 3)
+	{
+		if (arguments[2].empty()) //positions and normals
+		{
+			vertexIndex = std::stoi(arguments[0]) - 1;
+			normalIndex = std::stoi(arguments[2]) - 1;
+			return tigl::Vertex::PN(positions[vertexIndex], normals[normalIndex]);
+		}
+		else //positions, textures and normals
+		{
+			vertexIndex = std::stoi(arguments[0]) - 1;
+			uvIndex = std::stoi(arguments[1]) - 1;
+			normalIndex = std::stoi(arguments[2]) - 1;
+			return tigl::Vertex::PTN(positions[vertexIndex], textureCoords[uvIndex], normals[normalIndex]);
+		}
+	}
+	if (arguments.size() == 2) //positions and textures
+	{
+		vertexIndex = std::stoi(arguments[0]) - 1;
+		uvIndex = std::stoi(arguments[1]) - 1;
+		return tigl::Vertex::PT(positions[vertexIndex], textureCoords[uvIndex]);
+	}
+	if (arguments.size() == 1) //positions
+	{
+		vertexIndex = std::stoi(arguments[0]) - 1;
+		return tigl::Vertex::P(positions[vertexIndex]);
+	}
+	throw std::runtime_error("could not parse vertex argument " + vertexIndices);
 }
 
 void ObjParser::readMaterials(const std::string& filePath, std::vector<Material*>& loadedMaterials) const
