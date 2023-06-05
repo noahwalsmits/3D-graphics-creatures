@@ -20,3 +20,5 @@ private:
 	std::map<std::string, std::shared_ptr<MeshGroup>> loadedModels; //<file path, appropriate meshgroup>
 };
 
+//global ModelLoader instance
+extern ModelLoader MODEL_LOADER;

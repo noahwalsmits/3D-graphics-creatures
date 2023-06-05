@@ -2,6 +2,8 @@
 #include <stdexcept>
 #include <graphics/models/model-loader/ObjParser.h>
 
+ModelLoader MODEL_LOADER;
+
 ModelLoader::ModelLoader()
 {
 	this->fileParsers.emplace(".obj", new ObjParser());

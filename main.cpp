@@ -19,7 +19,7 @@ double lastTime;
 double lastMouseX = 0.0;
 double lastMouseY = 0.0;
 
-ModelLoader modelLoader;
+//ModelLoader modelLoader;
 std::vector<MeshGroup> models;
 
 void init();
@@ -90,7 +90,7 @@ void init()
 
 	//tigl::shader.get()->enableColor(true);
 	tigl::shader.get()->enableTexture(true);
-	models.push_back(modelLoader.loadModel("Egg 1/kart_YS_b.obj"));
+	models.push_back(MODEL_LOADER.loadModel("Egg 1/kart_YS_b.obj"));
 }
 
 
