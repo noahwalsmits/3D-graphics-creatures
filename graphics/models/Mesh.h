@@ -14,8 +14,6 @@ public:
 	Mesh(const Mesh& other);
 	Mesh& operator=(const Mesh& other);
 	~Mesh();
-	//TODO create destructor that also frees all resources from OpenGL
-	//TODO fix the copy constructors so the model can get a working list of these
 
 	void draw() const;
 

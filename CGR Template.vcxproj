@@ -163,6 +163,7 @@
     <ClCompile Include="graphics\models\Mesh.cpp" />
     <ClCompile Include="graphics\models\Material.cpp" />
     <ClCompile Include="graphics\models\Texture.cpp" />
+    <ClCompile Include="graphics\models\MeshGroup.cpp" />
     <ClCompile Include="tigl.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +176,7 @@
     <ClInclude Include="graphics\models\Mesh.h" />
     <ClInclude Include="graphics\models\Material.h" />
     <ClInclude Include="graphics\models\Texture.h" />
+    <ClInclude Include="graphics\models\MeshGroup.h" />
     <ClInclude Include="tigl.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

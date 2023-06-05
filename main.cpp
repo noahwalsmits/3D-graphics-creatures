@@ -19,7 +19,8 @@ double lastTime;
 double lastMouseX = 0.0;
 double lastMouseY = 0.0;
 
-std::vector<Mesh> meshes;
+ModelLoader modelLoader;
+std::vector<MeshGroup> models;
 
 void init();
 void update();
@@ -89,9 +90,7 @@ void init()
 
 	//tigl::shader.get()->enableColor(true);
 	tigl::shader.get()->enableTexture(true);
-	ObjParser parser;
-	//mesh = parser.parseModel("scarecrow/scarecrow.obj")[0];
-	meshes = parser.parseModel("Egg 1/kart_YS_b.obj");
+	models.push_back(modelLoader.loadModel("Egg 1/kart_YS_b.obj"));
 }
 
 
@@ -126,9 +125,9 @@ void draw()
 	tigl::shader.get()->setModelMatrix(modelMatrix);
 
 	/*TEST CODE*/
-	for (const Mesh& mesh : meshes) 
+	for (const MeshGroup& group : models) 
 	{
-		mesh.draw();
+		group.draw();
 	}
 }
 
