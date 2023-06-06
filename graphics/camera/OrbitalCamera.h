@@ -1,7 +1,8 @@
 #pragma once
 #include<graphics/camera/Camera.h>
+#include<graphics/input/Controllable.h>
 
-class OrbitalCamera : public Camera
+class OrbitalCamera : public Camera, public Controllable
 {
 public:
 	OrbitalCamera(glm::vec3 target);
@@ -9,7 +10,7 @@ public:
 
 	virtual glm::mat4 getViewMatrix() const override;
 	void mouseMoved(float deltaX, float deltaY) override;
-	void pollKeys(GLFWwindow* window, float deltaTime) override;
+	void pollKeyboard(GLFWwindow* window) override;
 
 private:
 	static constexpr float MOUSE_SENSITIVITY = 0.1f;

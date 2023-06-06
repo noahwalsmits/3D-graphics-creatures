@@ -80,5 +80,8 @@
     <ClInclude Include="graphics\models\MeshGroup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="graphics\input\Controllable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

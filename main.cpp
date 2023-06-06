@@ -13,11 +13,13 @@ using tigl::Vertex;
 #pragma comment(lib, "opengl32.lib")
 
 GLFWwindow* window;
-Camera* camera;
 int screenWidth, screenHeight;
 double lastTime;
 double lastMouseX = 0.0;
 double lastMouseY = 0.0;
+
+Camera* camera;
+std::vector<Controllable*> controllables;
 
 std::vector<Model> models;
 
@@ -76,7 +78,9 @@ void init()
 	lastMouseY = screenHeight / 2;
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-	camera = new OrbitalCamera(glm::vec3(0.0f, 0.0f, 0.0f));
+	OrbitalCamera* orbitalCamera = new OrbitalCamera(glm::vec3(0.0f, 0.0f, 0.0f));
+	camera = orbitalCamera;
+	controllables.push_back(orbitalCamera);
 
 	/*TEST CODE*/
 	//tigl::shader->enableColor(true);
@@ -93,12 +97,14 @@ void update()
 	double deltaTime = time - lastTime;
 	lastTime = time;
 
-	camera->pollKeys(window, deltaTime);
-
-	//poll mouse position
+	//poll mouse position and keys
 	double mouseX, mouseY;
 	glfwGetCursorPos(window, &mouseX, &mouseY);
-	camera->mouseMoved(mouseX - lastMouseX, mouseY - lastMouseY);
+	for (Controllable* controllable : controllables)
+	{
+		controllable->mouseMoved(mouseX - lastMouseX, mouseY - lastMouseY);
+		controllable->pollKeyboard(window);
+	}
 	lastMouseX = mouseX;
 	lastMouseY = mouseY;
 }

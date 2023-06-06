@@ -167,6 +167,7 @@
     <ClCompile Include="tigl.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="graphics\input\Controllable.h" />
     <ClInclude Include="graphics\camera\Camera.h" />
     <ClInclude Include="graphics\models\model-loader\ModelLoader.h" />
     <ClInclude Include="graphics\camera\OrbitalCamera.h" />

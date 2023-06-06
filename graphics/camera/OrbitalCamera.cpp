@@ -30,7 +30,7 @@ void OrbitalCamera::mouseMoved(float deltaX, float deltaY)
 	this->updateViewingAngle();
 }
 
-void OrbitalCamera::pollKeys(GLFWwindow* window, float deltaTime)
+void OrbitalCamera::pollKeyboard(GLFWwindow* window)
 {
 
 }
