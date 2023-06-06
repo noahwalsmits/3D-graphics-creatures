@@ -1,5 +1,5 @@
 #pragma once
-#include<graphics/Camera.h>
+#include<graphics/camera/Camera.h>
 
 class OrbitalCamera : public Camera
 {

@@ -3,7 +3,7 @@
 #include "tigl.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
-#include <graphics/OrbitalCamera.h>
+#include <graphics/camera/OrbitalCamera.h>
 #include <graphics/models/model-loader/ModelLoader.h>
 #include <graphics/models/model-loader/ObjParser.h>
 using tigl::Vertex;

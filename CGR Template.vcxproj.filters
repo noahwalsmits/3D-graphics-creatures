@@ -24,7 +24,7 @@
     <ClCompile Include="graphics\models\model-loader\ModelLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="graphics\OrbitalCamera.cpp">
+    <ClCompile Include="graphics\camera\OrbitalCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="graphics\models\Model.cpp">
@@ -53,10 +53,10 @@
     <ClInclude Include="graphics\models\model-loader\ModelLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="graphics\Camera.h">
+    <ClInclude Include="graphics\camera\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="graphics\OrbitalCamera.h">
+    <ClInclude Include="graphics\camera\OrbitalCamera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="graphics\models\Model.h">
