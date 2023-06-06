@@ -8,7 +8,7 @@ public:
 	virtual ~Entity() = default;
 
 	virtual void update(float deltaTime) = 0;
-	void draw(tigl::internal::Shader& shader);
+	void draw(tigl::internal::Shader& shader) const;
 
 private:
 	std::vector<Model> models;

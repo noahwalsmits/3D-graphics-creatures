@@ -6,6 +6,7 @@
 #include <graphics/camera/OrbitalCamera.h>
 #include <graphics/models/model-loader/ModelLoader.h>
 #include <graphics/models/model-loader/ObjParser.h>
+#include <graphics/entities/Entity.h>
 using tigl::Vertex;
 
 #pragma comment(lib, "glfw3.lib")
@@ -20,8 +21,8 @@ double lastMouseY = 0.0;
 
 Camera* camera;
 std::vector<Controllable*> controllables;
-
-std::vector<Model> models;
+std::vector<Entity*> gameEntities;
+std::vector<Model*> sceneryModels;
 
 void init();
 void update();
@@ -82,12 +83,18 @@ void init()
 	camera = orbitalCamera;
 	controllables.push_back(orbitalCamera);
 
+	//TODO set up lighting
+	
+	//TODO create scenery
+
+	//TODO create entities
+
 	/*TEST CODE*/
 	//tigl::shader->enableColor(true);
 	tigl::shader->enableTexture(true);
-	models.push_back(Model("Egg 1/kart_YS_b.obj", glm::vec3(-1.0f, 0.0f, 0.0f)));
-	models.push_back(Model("Egg 1/kart_YS_b.obj", glm::vec3(0.0f, 0.0f, 0.0f)));
-	models.push_back(Model("Egg 1/kart_YS_b.obj", glm::vec3(1.0f, 0.0f, 0.0f)));
+	sceneryModels.push_back(new Model("Egg 1/kart_YS_b.obj", glm::vec3(-1.0f, 0.0f, 0.0f)));
+	sceneryModels.push_back(new Model("Egg 1/kart_YS_b.obj", glm::vec3(0.0f, 0.0f, 0.0f)));
+	sceneryModels.push_back(new Model("Egg 1/kart_YS_b.obj", glm::vec3(1.0f, 0.0f, 0.0f)));
 }
 
 
@@ -96,6 +103,11 @@ void update()
 	double time = glfwGetTime();
 	double deltaTime = time - lastTime;
 	lastTime = time;
+
+	for (Entity* entity : gameEntities)
+	{
+		entity->update(deltaTime);
+	}
 
 	//poll mouse position and keys
 	double mouseX, mouseY;
@@ -122,13 +134,26 @@ void draw()
 	tigl::shader.get()->setViewMatrix(viewMatrix);
 	//model matrix is set by each model before drawing
 
-	for (const Model& model : models)
+	for (const Model* model : sceneryModels)
 	{
-		model.draw(*tigl::shader);
+		model->draw(*tigl::shader);
+	}
+	for (const Entity* entity : gameEntities)
+	{
+		entity->draw(*tigl::shader);
 	}
 }
 
 void exit()
 {
 	delete camera;
+
+	for (const Model* model : sceneryModels)
+	{
+		delete model;
+	}
+	for (const Entity* entity : gameEntities)
+	{
+		delete entity;
+	}
 }
