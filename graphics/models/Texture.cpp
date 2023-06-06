@@ -52,3 +52,8 @@ void Texture::bind()
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, this->id);
 }
+
+void Texture::deleteResources()
+{
+	glDeleteTextures(1, &this->id);
+}

@@ -16,6 +16,7 @@ public:
 	~Mesh();
 
 	void draw() const;
+	void deleteResources();
 
 private:
 	tigl::VBO* vbo;

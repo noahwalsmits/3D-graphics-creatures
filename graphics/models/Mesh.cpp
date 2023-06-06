@@ -37,3 +37,9 @@ void Mesh::draw() const
 	this->material->texture->bind();
 	tigl::drawVertices(this->shape, this->vbo);
 }
+
+void Mesh::deleteResources()
+{
+	this->material->texture->deleteResources();
+	//this->vbo
+}

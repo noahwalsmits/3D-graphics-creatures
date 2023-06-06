@@ -81,7 +81,9 @@ void init()
 	/*TEST CODE*/
 	//tigl::shader->enableColor(true);
 	tigl::shader->enableTexture(true);
+	models.push_back(Model("Egg 1/kart_YS_b.obj", glm::vec3(-1.0f, 0.0f, 0.0f)));
 	models.push_back(Model("Egg 1/kart_YS_b.obj", glm::vec3(0.0f, 0.0f, 0.0f)));
+	models.push_back(Model("Egg 1/kart_YS_b.obj", glm::vec3(1.0f, 0.0f, 0.0f)));
 }
 
 
@@ -112,9 +114,9 @@ void draw()
 
 	tigl::shader.get()->setProjectionMatrix(projectionMatrix);
 	tigl::shader.get()->setViewMatrix(viewMatrix);
-	//model matrix is set by each model
+	//model matrix is set by each model before drawing
 
-	for (const Model& model : models) 
+	for (const Model& model : models)
 	{
 		model.draw(*tigl::shader);
 	}
