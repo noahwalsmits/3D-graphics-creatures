@@ -3,6 +3,11 @@
 #include "tigl.h"
 #include <graphics/models/Material.h>
 
+/// <summary>
+/// Represents a group of vertices with a material which can be drawn.
+/// The GPU resources to draw a Mesh are allocated when creating an instance.
+/// These resources are freed when the Mesh is destroyed.
+/// </summary>
 class Mesh
 {
 public:

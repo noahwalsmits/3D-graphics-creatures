@@ -2,6 +2,10 @@
 #include <vector>
 #include <graphics/models/Mesh.h>
 
+/// <summary>
+/// The graphical data to draw a model.
+/// Deleting a MeshGroup will also delete its underlying Meshes and free the allocated GPU resources.
+/// </summary>
 class MeshGroup
 {
 public:
@@ -11,7 +15,6 @@ public:
 	~MeshGroup();
 
 	void draw() const;
-	//TODO create destructor that also frees all resources from OpenGL
 
 private:
 	std::vector<Mesh*> meshes;

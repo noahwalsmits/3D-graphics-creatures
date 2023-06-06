@@ -1,6 +1,10 @@
 #pragma once
 #include<string>
 
+/// <summary>
+/// Reads an image file and creates the GPU resources required to use it as a texture.
+/// Deleting a texture will also free its GPU resources.
+/// </summary>
 class Texture
 {
 public:
@@ -12,7 +16,7 @@ public:
 	Texture(const Texture& other) = delete;
 	Texture& operator=(const Texture& other) = delete;
 	~Texture();
-
+	
 	void bind();
 
 private:

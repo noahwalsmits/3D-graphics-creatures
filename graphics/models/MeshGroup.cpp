@@ -7,7 +7,10 @@ MeshGroup::MeshGroup(const std::vector<Mesh*>& meshes)
 
 MeshGroup::~MeshGroup()
 {
-	
+	for (const Mesh* mesh : this->meshes)
+	{
+		delete mesh;
+	}
 }
 
 void MeshGroup::draw() const
