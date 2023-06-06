@@ -47,13 +47,13 @@ Texture::Texture(const std::string& filePath)
 	stbi_image_free(data);
 }
 
+Texture::~Texture()
+{
+	glDeleteTextures(1, &this->id);
+}
+
 void Texture::bind()
 {
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, this->id);
-}
-
-void Texture::deleteResources()
-{
-	glDeleteTextures(1, &this->id);
 }

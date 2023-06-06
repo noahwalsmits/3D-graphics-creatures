@@ -8,7 +8,7 @@ public:
 	Texture* texture;
 
 	Material() = default;
-	Material(const Material& other);
-	Material& operator=(const Material& other);
+	Material(const Material& other) = delete;
+	Material& operator=(const Material& other) = delete;
 	~Material();
 };

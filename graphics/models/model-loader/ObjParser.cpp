@@ -9,11 +9,11 @@ ObjParser::ObjParser() : ModelParser()
 {
 }
 
-std::vector<Mesh> ObjParser::parseModel(const std::string& assetPath) const
+std::vector<Mesh*> ObjParser::parseModel(const std::string& assetPath) const
 {
 	std::string filePath = "assets/" + assetPath;
 	std::cout << "loading model " << filePath << std::endl;
-	std::vector<Mesh> meshes;
+	std::vector<Mesh*> meshes;
 
 	std::ifstream objFile(filePath.c_str());
 	if (!objFile.is_open())
@@ -63,7 +63,7 @@ std::vector<Mesh> ObjParser::parseModel(const std::string& assetPath) const
 			//add all previously read faces into a mesh with the previously read material
 			if (readVertices.size() > 0 && currentMaterial)
 			{
-				meshes.push_back(Mesh(readVertices, currentMaterial));
+				meshes.push_back(new Mesh(readVertices, currentMaterial));
 				readVertices.clear();
 			}
 			//set new current material
@@ -79,7 +79,7 @@ std::vector<Mesh> ObjParser::parseModel(const std::string& assetPath) const
 	//after we are done reading we need to add the remaining faces into a mesh with the last material
 	if (readVertices.size() > 0 && currentMaterial)
 	{
-		meshes.push_back(Mesh(readVertices, currentMaterial));
+		meshes.push_back(new Mesh(readVertices, currentMaterial));
 		readVertices.clear();
 	}
 

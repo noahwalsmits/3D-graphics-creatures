@@ -39,7 +39,7 @@ std::shared_ptr <MeshGroup> ModelLoader::loadModel(const std::string& filePath)
 	}
 
 	//parse model and keep it saved
-	MeshGroup meshGroup = MeshGroup(this->fileParsers[fileExtention]->parseModel(filePath));
-	this->loadedModels.emplace(filePath, std::make_shared<MeshGroup>(meshGroup));
+	std::shared_ptr<MeshGroup> meshGroupPtr(new MeshGroup(this->fileParsers[fileExtention]->parseModel(filePath)));
+	this->loadedModels.emplace(filePath, meshGroupPtr);
 	return this->loadedModels[filePath];
 }

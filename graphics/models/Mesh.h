@@ -11,12 +11,11 @@ public:
 	/// VBO and can safely be discarded afterwards.
 	/// </summary>
 	Mesh(const std::vector<tigl::Vertex>& vertices, Material* material, GLenum shape = GL_TRIANGLES);
-	Mesh(const Mesh& other);
-	Mesh& operator=(const Mesh& other);
+	Mesh(const Mesh& other) = delete;
+	Mesh& operator=(const Mesh& other) = delete;
 	~Mesh();
 
 	void draw() const;
-	void deleteResources();
 
 private:
 	tigl::VBO* vbo;

@@ -8,6 +8,6 @@ class ModelParser
 public:
 	virtual ~ModelParser() = default;
 
-	virtual std::vector<Mesh> parseModel(const std::string& filePath) const = 0;
+	virtual std::vector<Mesh*> parseModel(const std::string& filePath) const = 0;
 };
 
