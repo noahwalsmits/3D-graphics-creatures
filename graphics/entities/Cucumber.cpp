@@ -19,12 +19,13 @@ Cucumber::~Cucumber()
 
 void Cucumber::update(float deltaTime)
 {
-	//this->position.z += deltaTime * this->moveSpeed * 5.0f;
-	//this->position.x += deltaTime * this->strafeSpeed * 5.0f;
-
 	//update position
 	this->position->z += cos(glm::radians(this->rotation)) * deltaTime * this->moveSpeed * 5.0f;
 	this->position->x += sin(glm::radians(this->rotation)) * deltaTime * this->moveSpeed * 5.0f;
+	
+	this->position->x -= cos(glm::radians(this->rotation)) * deltaTime * this->strafeSpeed * 5.0f;
+	this->position->z -= sin(glm::radians(this->rotation)) * deltaTime * this->strafeSpeed * 5.0f;
+	
 	//TODO camera tracking
 }
 
