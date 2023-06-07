@@ -9,6 +9,7 @@ class Material
 public:
 	std::string name;
 	Texture* texture;
+	float shinyness = 0.0f;
 
 	Material() = default;
 	Material(const Material& other) = delete;

@@ -179,6 +179,10 @@ void ObjParser::readMaterials(const std::string& filePath, std::vector<Material*
 			std::string directoryPath = filePath.substr(0, filePath.find_last_of("/"));
 			currentMaterial->texture = new Texture(directoryPath + "/" + arguments[1]);
 		}
+		else if (arguments[0] == "Ns") //read shinyness
+		{
+			currentMaterial->shinyness = std::stof(arguments[1]);
+		}
 		//TODO other parameter types
 	}
 	//add the last material after we are done reading

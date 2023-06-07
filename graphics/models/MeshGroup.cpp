@@ -13,10 +13,10 @@ MeshGroup::~MeshGroup()
 	}
 }
 
-void MeshGroup::draw() const
+void MeshGroup::draw(tigl::internal::Shader& shader) const
 {
 	for (const Mesh* mesh : this->meshes)
 	{
-		mesh->draw();
+		mesh->draw(shader);
 	}
 }

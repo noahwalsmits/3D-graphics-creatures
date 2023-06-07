@@ -20,7 +20,7 @@ public:
 	Mesh& operator=(const Mesh& other) = delete;
 	~Mesh();
 
-	void draw() const;
+	void draw(tigl::internal::Shader& shader) const;
 
 private:
 	tigl::VBO* vbo;

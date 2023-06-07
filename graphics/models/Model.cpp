@@ -23,5 +23,5 @@ void Model::draw(tigl::internal::Shader& shader) const
 	//update the model uniform
 	shader.setModelMatrix(modelMatrix);
 
-	this->meshGroup->draw();
+	this->meshGroup->draw(shader);
 }

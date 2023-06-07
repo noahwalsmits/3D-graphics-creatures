@@ -13,8 +13,9 @@ Mesh::~Mesh()
 	delete this->material;
 }
 
-void Mesh::draw() const
+void Mesh::draw(tigl::internal::Shader& shader) const
 {
 	this->material->texture->bind();
+	shader.setShinyness(this->material->shinyness);
 	tigl::drawVertices(this->shape, this->vbo);
 }

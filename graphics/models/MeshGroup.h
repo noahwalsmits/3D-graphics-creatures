@@ -14,7 +14,7 @@ public:
 	MeshGroup& operator=(const MeshGroup& other) = delete;
 	~MeshGroup();
 
-	void draw() const;
+	void draw(tigl::internal::Shader& shader) const;
 
 private:
 	std::vector<Mesh*> meshes;
