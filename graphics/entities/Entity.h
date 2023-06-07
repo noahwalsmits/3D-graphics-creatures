@@ -7,7 +7,7 @@ class Entity
 public:
 	virtual ~Entity() = default;
 
-	virtual void update(float deltaTime) = 0; //TODO move position to entity
+	virtual void update(float deltaTime) = 0;
 	void draw(tigl::internal::Shader& shader) const;
 
 protected:

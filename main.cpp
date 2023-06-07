@@ -100,7 +100,7 @@ void init()
 	
 	//create scenery
 	Model* floor = new Model("kitchenfloor/kitchenfloor.obj", glm::vec3(0.0f, 0.0f, 0.0f));
-	floor->scale = 100.0f;
+	*floor->scale = 100.0f;
 	sceneryModels.push_back(floor);
 
 	//create entities

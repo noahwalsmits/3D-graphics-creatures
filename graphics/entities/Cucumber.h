@@ -16,8 +16,9 @@ public:
 	const Camera& getCamera() const { return *this->camera; }
 
 private:
-	glm::vec3 position;
 	OrbitalCamera* camera;
+	std::shared_ptr<glm::vec3> position;
+	float rotation = 0.0f;
 	float moveSpeed = 0.0f;
 	float strafeSpeed = 0.0f;
 };

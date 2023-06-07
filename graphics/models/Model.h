@@ -6,12 +6,14 @@
 class Model
 {
 public:
-	glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f); //location do draw the model
-	float rotationYaw = 0.0f; //z-axis rotation in degrees
-	float rotationPitch = 0.0f; //y-axis rotation in degrees
-	float rotationRoll = 0.0f; //x-axis rotation in degrees
-	glm::vec3 offset = glm::vec3(0.0f, 0.0f, 0.0f); //offset to position applied after rotation
-	float scale = 1.0f; //size to draw the model with
+	//models start out with internal values
+	//these can be replaced with different pointers so that multiple models can read from the same values
+	std::shared_ptr<glm::vec3> position; //location to draw the model
+	std::shared_ptr<float> rotationYaw; //z-axis rotation in degrees
+	std::shared_ptr<float> rotationPitch; //y-axis rotation in degrees
+	std::shared_ptr<float> rotationRoll; //x-axis rotation in degrees
+	std::shared_ptr<glm::vec3> offset; //offset to position applied after rotation
+	std::shared_ptr<float> scale; //size to draw the model with
 
 	Model(const std::string& filePath, const glm::vec3& position);
 

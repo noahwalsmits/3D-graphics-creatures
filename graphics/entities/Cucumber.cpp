@@ -2,9 +2,14 @@
 
 Cucumber::Cucumber(const glm::vec3& position) : Entity(), Controllable()
 {
-	this->position = position;
+	this->position = std::make_shared<glm::vec3>(position);
 	this->models.push_back(Model("Egg 1/kart_YS_b.obj", position));
 	this->camera = new OrbitalCamera(position);
+
+	for (Model& model : this->models)
+	{
+		model.position = this->position;
+	}
 }
 
 Cucumber::~Cucumber()
@@ -14,14 +19,13 @@ Cucumber::~Cucumber()
 
 void Cucumber::update(float deltaTime)
 {
-	this->position.z += deltaTime * this->moveSpeed * 5.0f;
-	this->position.x += deltaTime * this->strafeSpeed * 5.0f;
-	for (Model& model : this->models)
-	{
-		model.position = this->position;
-	}
+	//this->position.z += deltaTime * this->moveSpeed * 5.0f;
+	//this->position.x += deltaTime * this->strafeSpeed * 5.0f;
+
+	//update position
+	this->position->z += cos(glm::radians(this->rotation)) * deltaTime * this->moveSpeed * 5.0f;
+	this->position->x += sin(glm::radians(this->rotation)) * deltaTime * this->moveSpeed * 5.0f;
 	//TODO camera tracking
-	//TODO model updates to base class
 }
 
 void Cucumber::mouseMoved(float deltaX, float deltaY)
