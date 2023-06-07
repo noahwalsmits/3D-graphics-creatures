@@ -62,8 +62,6 @@ int main(void)
 
 void init()
 {
-	glEnable(GL_DEPTH_TEST);
-
 	glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
 		{
 			if (key == GLFW_KEY_ESCAPE)
@@ -78,9 +76,9 @@ void init()
 	lastMouseY = screenHeight / 2;
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-	OrbitalCamera* orbitalCamera = new OrbitalCamera(glm::vec3(0.0f, 0.0f, 0.0f));
-	camera = orbitalCamera;
-	controllables.push_back(orbitalCamera);
+	//set up rendering correctly
+	glEnable(GL_DEPTH_TEST);
+	tigl::shader->enableTexture(true);
 
 	//set up fog
 	glm::vec3 backgroundcolor = glm::vec3(0.3f, 0.4f, 0.6f);
@@ -89,7 +87,15 @@ void init()
 	tigl::shader->setFogColor(backgroundcolor);
 	glClearColor(backgroundcolor.r, backgroundcolor.g, backgroundcolor.b, 1.0f);
 
-	//TODO set up lighting
+	//set up lighting
+	tigl::shader->enableLighting(true);
+	tigl::shader->setLightCount(1);
+	tigl::shader->setLightDirectional(0, true);
+	tigl::shader->setLightPosition(0, glm::vec3(0.0f, 1.0f, 0.0f));
+
+	tigl::shader->setLightAmbient(0, glm::vec3(0.3f, 0.3f, 0.3f));
+	tigl::shader->setLightDiffuse(0, glm::vec3(0.6f, 0.6f, 0.6f));
+	tigl::shader->setLightSpecular(0, glm::vec3(0.6f, 0.6f, 0.6f));
 	
 	//create scenery
 	Model* floor = new Model("kitchenfloor/kitchenfloor.obj", glm::vec3(0.0f, 0.0f, 0.0f));
@@ -98,11 +104,15 @@ void init()
 
 	//TODO create entities
 
+	//set up controllables
+	OrbitalCamera* orbitalCamera = new OrbitalCamera(glm::vec3(0.0f, 0.0f, 0.0f));
+	camera = orbitalCamera;
+	controllables.push_back(orbitalCamera);
+
 	/*TEST CODE*/
 	//tigl::shader->enableColor(true);
-	tigl::shader->enableTexture(true);
 	sceneryModels.push_back(new Model("Egg 1/kart_YS_b.obj", glm::vec3(-1.0f, 0.0f, 0.0f)));
-	sceneryModels.push_back(new Model("Egg 1/kart_YS_b.obj", glm::vec3(0.0f, 0.0f, 0.0f)));
+	sceneryModels.push_back(new Model("scarecrow/scarecrow.obj", glm::vec3(0.0f, -6.0f, 0.0f)));
 	sceneryModels.push_back(new Model("Egg 1/kart_YS_b.obj", glm::vec3(1.0f, 0.0f, 0.0f)));
 }
 
