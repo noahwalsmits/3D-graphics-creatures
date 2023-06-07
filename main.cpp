@@ -63,7 +63,6 @@ int main(void)
 void init()
 {
 	glEnable(GL_DEPTH_TEST);
-	glClearColor(0.3f, 0.4f, 0.6f, 1.0f);
 
 	glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
 		{
@@ -83,9 +82,19 @@ void init()
 	camera = orbitalCamera;
 	controllables.push_back(orbitalCamera);
 
+	//set up fog
+	glm::vec3 backgroundcolor = glm::vec3(0.3f, 0.4f, 0.6f);
+	tigl::shader->enableFog(true);
+	tigl::shader->setFogExp2(0.1f);
+	tigl::shader->setFogColor(backgroundcolor);
+	glClearColor(backgroundcolor.r, backgroundcolor.g, backgroundcolor.b, 1.0f);
+
 	//TODO set up lighting
 	
-	//TODO create scenery
+	//create scenery
+	Model* floor = new Model("kitchenfloor/kitchenfloor.obj", glm::vec3(0.0f, 0.0f, 0.0f));
+	floor->scale = 100.0f;
+	sceneryModels.push_back(floor);
 
 	//TODO create entities
 
