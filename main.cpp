@@ -170,8 +170,6 @@ void draw()
 
 void exit()
 {
-	delete camera;
-
 	for (const Model* model : sceneryModels)
 	{
 		delete model;

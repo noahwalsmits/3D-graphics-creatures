@@ -9,10 +9,19 @@ Cucumber::Cucumber(const glm::vec3& position) : Entity(), Controllable()
 
 Cucumber::~Cucumber()
 {
+	delete this->camera;
 }
 
 void Cucumber::update(float deltaTime)
 {
+	this->position.z += deltaTime * this->moveSpeed * 5.0f;
+	this->position.x += deltaTime * this->strafeSpeed * 5.0f;
+	for (Model& model : this->models)
+	{
+		model.position = this->position;
+	}
+	//TODO camera tracking
+	//TODO model updates to base class
 }
 
 void Cucumber::mouseMoved(float deltaX, float deltaY)
@@ -22,8 +31,8 @@ void Cucumber::mouseMoved(float deltaX, float deltaY)
 
 void Cucumber::pollKeyboard(GLFWwindow* window)
 {
-	this->moveSpeed = 1.0f;
-	this->strafeSpeed = 1.0f;
+	this->moveSpeed = 0.0f;
+	this->strafeSpeed = 0.0f;
 
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 	{
