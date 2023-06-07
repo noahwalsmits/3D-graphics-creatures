@@ -16,6 +16,9 @@ Mesh::~Mesh()
 void Mesh::draw(tigl::internal::Shader& shader) const
 {
 	this->material->texture->bind();
+	//shader.setLightAmbient(0, this->material->ambientColor);
+	//shader.setLightDiffuse(0, this->material->diffuseColor);
+	//shader.setLightSpecular(0, this->material->specularColor);
 	shader.setShinyness(this->material->shinyness);
 	tigl::drawVertices(this->shape, this->vbo);
 }

@@ -179,6 +179,18 @@ void ObjParser::readMaterials(const std::string& filePath, std::vector<Material*
 			std::string directoryPath = filePath.substr(0, filePath.find_last_of("/"));
 			currentMaterial->texture = new Texture(directoryPath + "/" + arguments[1]);
 		}
+		else if (arguments[0] == "Ka") //read ambient color
+		{
+			currentMaterial->ambientColor = glm::vec3(std::stof(arguments[1]), std::stof(arguments[2]), std::stof(arguments[3]));
+		}
+		else if (arguments[0] == "Kd") //read diffuse color
+		{
+			currentMaterial->diffuseColor = glm::vec3(std::stof(arguments[1]), std::stof(arguments[2]), std::stof(arguments[3]));
+		}
+		else if (arguments[0] == "Ks") //read specular color
+		{
+			currentMaterial->specularColor = glm::vec3(std::stof(arguments[1]), std::stof(arguments[2]), std::stof(arguments[3]));
+		}
 		else if (arguments[0] == "Ns") //read shinyness
 		{
 			currentMaterial->shinyness = std::stof(arguments[1]);
