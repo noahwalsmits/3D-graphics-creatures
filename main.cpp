@@ -7,6 +7,7 @@
 #include <graphics/models/model-loader/ModelLoader.h>
 #include <graphics/models/model-loader/ObjParser.h>
 #include <graphics/entities/Entity.h>
+#include <graphics/entities/Cucumber.h>
 using tigl::Vertex;
 
 #pragma comment(lib, "glfw3.lib")
@@ -19,7 +20,7 @@ double lastTime;
 double lastMouseX = 0.0;
 double lastMouseY = 0.0;
 
-Camera* camera;
+const Camera* camera;
 std::vector<Controllable*> controllables;
 std::vector<Entity*> gameEntities;
 std::vector<Model*> sceneryModels;
@@ -102,12 +103,16 @@ void init()
 	floor->scale = 100.0f;
 	sceneryModels.push_back(floor);
 
-	//TODO create entities
+	//create entities
+	Cucumber* player = new Cucumber(glm::vec3(0.0f, 0.0f, 0.0f));
+	gameEntities.push_back(player);
+	controllables.push_back(player);
+	camera = &player->getCamera();
 
 	//set up controllables
-	OrbitalCamera* orbitalCamera = new OrbitalCamera(glm::vec3(0.0f, 0.0f, 0.0f));
-	camera = orbitalCamera;
-	controllables.push_back(orbitalCamera);
+	//OrbitalCamera* orbitalCamera = new OrbitalCamera(glm::vec3(0.0f, 0.0f, 0.0f));
+	//camera = orbitalCamera;
+	//controllables.push_back(orbitalCamera);
 
 	/*TEST CODE*/
 	//tigl::shader->enableColor(true);

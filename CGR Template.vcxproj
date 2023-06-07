@@ -155,6 +155,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="graphics\entities\Cat.cpp" />
+    <ClCompile Include="graphics\entities\Cucumber.cpp" />
     <ClCompile Include="graphics\entities\Entity.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="graphics\models\model-loader\ModelLoader.cpp" />
@@ -168,6 +170,8 @@
     <ClCompile Include="tigl.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="graphics\entities\Cat.h" />
+    <ClInclude Include="graphics\entities\Cucumber.h" />
     <ClInclude Include="graphics\entities\Entity.h" />
     <ClInclude Include="graphics\input\Controllable.h" />
     <ClInclude Include="graphics\camera\Camera.h" />

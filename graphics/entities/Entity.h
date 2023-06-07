@@ -7,10 +7,10 @@ class Entity
 public:
 	virtual ~Entity() = default;
 
-	virtual void update(float deltaTime) = 0;
+	virtual void update(float deltaTime) = 0; //TODO move position to entity
 	void draw(tigl::internal::Shader& shader) const;
 
-private:
+protected:
 	std::vector<Model> models;
 };
 

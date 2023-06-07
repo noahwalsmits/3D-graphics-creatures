@@ -195,7 +195,6 @@ void ObjParser::readMaterials(const std::string& filePath, std::vector<Material*
 		{
 			currentMaterial->shinyness = std::stof(arguments[1]);
 		}
-		//TODO other parameter types
 	}
 	//add the last material after we are done reading
 	if (currentMaterial)
