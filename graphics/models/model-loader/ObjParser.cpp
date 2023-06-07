@@ -27,6 +27,7 @@ std::vector<Mesh*> ObjParser::parseModel(const std::string& assetPath) const
 	std::vector<tigl::Vertex> readVertices;
 	std::vector<Material*> loadedMaterials;
 	Material* currentMaterial = nullptr;
+	GLenum lastShape = GL_TRIANGLES;
 
 	while (!objFile.eof())
 	{
@@ -48,6 +49,15 @@ std::vector<Mesh*> ObjParser::parseModel(const std::string& assetPath) const
 		}
 		else if (arguments[0] == "f") //read face
 		{
+			switch (arguments.size())
+			{
+			case 4:
+				lastShape = GL_TRIANGLES;
+				break;
+			case 5:
+				lastShape = GL_QUADS;
+				break;
+			}
 			for (int i = 1; i < arguments.size(); i++) //read each vertex
 			{
 				readVertices.push_back(parseVertex(arguments[i], readPositions, readTexCoords, readNormals));
@@ -63,7 +73,7 @@ std::vector<Mesh*> ObjParser::parseModel(const std::string& assetPath) const
 			//add all previously read faces into a mesh with the previously read material
 			if (readVertices.size() > 0 && currentMaterial)
 			{
-				meshes.push_back(new Mesh(readVertices, currentMaterial));
+				meshes.push_back(new Mesh(readVertices, currentMaterial, lastShape));
 				readVertices.clear();
 			}
 			//set new current material
@@ -79,7 +89,7 @@ std::vector<Mesh*> ObjParser::parseModel(const std::string& assetPath) const
 	//after we are done reading we need to add the remaining faces into a mesh with the last material
 	if (readVertices.size() > 0 && currentMaterial)
 	{
-		meshes.push_back(new Mesh(readVertices, currentMaterial));
+		meshes.push_back(new Mesh(readVertices, currentMaterial, lastShape));
 		readVertices.clear();
 	}
 
