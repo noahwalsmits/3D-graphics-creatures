@@ -8,6 +8,7 @@
 #include <graphics/models/model-loader/ObjParser.h>
 #include <graphics/entities/Entity.h>
 #include <graphics/entities/Cucumber.h>
+#include <graphics/entities/Cat.h>
 using tigl::Vertex;
 
 #pragma comment(lib, "glfw3.lib")
@@ -109,6 +110,14 @@ void init()
 	controllables.push_back(player);
 	camera = &player->getCamera();
 
+	float spawnRange = 10.0f;
+	for (int i = 0; i < 10; i++)
+	{
+		float spawnX = -spawnRange + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (2 * spawnRange)));
+		float spawnZ = -spawnRange + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (2 * spawnRange)));
+		gameEntities.push_back(new Cat(glm::vec3(spawnX, 0.0f, spawnZ), *player));
+	}
+
 	//set up controllables
 	//OrbitalCamera* orbitalCamera = new OrbitalCamera(glm::vec3(0.0f, 0.0f, 0.0f));
 	//camera = orbitalCamera;
@@ -116,9 +125,9 @@ void init()
 
 	/*TEST CODE*/
 	//tigl::shader->enableColor(true);
-	sceneryModels.push_back(new Model("Egg 1/kart_YS_b.obj", glm::vec3(-1.0f, 0.0f, 0.0f)));
-	sceneryModels.push_back(new Model("scarecrow/scarecrow.obj", glm::vec3(0.0f, -6.0f, 0.0f)));
-	sceneryModels.push_back(new Model("Egg 1/kart_YS_b.obj", glm::vec3(1.0f, 0.0f, 0.0f)));
+	//sceneryModels.push_back(new Model("Egg 1/kart_YS_b.obj", glm::vec3(-1.0f, 0.0f, 0.0f)));
+	//sceneryModels.push_back(new Model("scarecrow/scarecrow.obj", glm::vec3(0.0f, -6.0f, 0.0f)));
+	//sceneryModels.push_back(new Model("Egg 1/kart_YS_b.obj", glm::vec3(1.0f, 0.0f, 0.0f)));
 }
 
 
