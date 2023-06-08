@@ -37,11 +37,14 @@ void Cat::update(float deltaTime)
 	//gradually turn model towards desired rotation
 	float rotationDifference = this->desiredRotation - *this->currentRotation;
 	if (rotationDifference > 180.0f)
+	{
 		rotationDifference -= 360.0f;
+	}
 	else if (rotationDifference < -180.0f)
+	{
 		rotationDifference += 360.0f;
-	*this->currentRotation += rotationDifference * deltaTime;
-	//TODO increase rotation speed
+	}
+	*this->currentRotation += rotationDifference * deltaTime * ROTATION_SPEED;
 
 	//move in desired direction
 	this->position->z += cos(glm::radians(this->desiredRotation)) * deltaTime * this->movementSpeed;
