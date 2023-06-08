@@ -22,8 +22,10 @@ void Cat::update(float deltaTime)
 	this->movementSpeed = 0.0f;
 
 	//run away from the player
-	if (glm::distance(*this->position, this->player.getPosition()) < DETECTION_RANGE)
+	float distance = glm::distance(*this->position, this->player.getPosition());
+	if (distance <= DETECTION_RANGE)
 	{
+		//find angle to face away from the player
 		glm::mat4 rotation = glm::lookAt(*this->position, this->player.getPosition(), glm::vec3(0, 1, 0));
 		glm::vec3 angles = glm::degrees(glm::eulerAngles(glm::inverse(glm::quat_cast(rotation))));
 		this->desiredRotation = angles.y;
@@ -31,7 +33,10 @@ void Cat::update(float deltaTime)
 		{
 			this->desiredRotation = 180.0f - angles.y;
 		}
-		this->movementSpeed = FLEEING_SPEED; //TODO base this on distance
+
+		//approaches 1 as distance decreases towards MAX_SPEED_DISTANCE
+		float speedMultiplier = std::min((DETECTION_RANGE - distance + MAX_SPEED_DISTANCE) / DETECTION_RANGE, 1.0f);
+		this->movementSpeed = MAX_FLEEING_SPEED * speedMultiplier;
 	}
 
 	//gradually turn model towards desired rotation
