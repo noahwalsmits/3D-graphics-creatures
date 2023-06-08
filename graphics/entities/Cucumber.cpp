@@ -32,6 +32,7 @@ void Cucumber::update(float deltaTime)
 void Cucumber::mouseMoved(float deltaX, float deltaY)
 {
 	this->camera->mouseMoved(deltaX, deltaY);
+	this->rotation = camera->getYaw();
 }
 
 void Cucumber::pollKeyboard(GLFWwindow* window)
