@@ -1,9 +1,8 @@
 #include "OrbitalCamera.h"
 #include <glm/gtc/matrix_transform.hpp>
 
-OrbitalCamera::OrbitalCamera(glm::vec3 target) : Camera()
+OrbitalCamera::OrbitalCamera(glm::vec3& target) : target(target), Camera()
 {
-	this->target = target;
 	this->updateViewingAngle();
 }
 

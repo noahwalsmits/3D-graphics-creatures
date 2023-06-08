@@ -5,7 +5,7 @@
 class OrbitalCamera : public Camera, public Controllable
 {
 public:
-	OrbitalCamera(glm::vec3 target);
+	OrbitalCamera(glm::vec3& target);
 	~OrbitalCamera() = default;
 
 	virtual glm::mat4 getViewMatrix() const override;
@@ -25,10 +25,10 @@ private:
 	static constexpr float MAX_PITCH = 89.0f;
 
 	const glm::vec3 worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
-	glm::vec3 target; //the position the camera is looking at
+	glm::vec3& target; //the position the camera is looking at
 	glm::vec3 position; //the current position of the camera
 	float distance = 5.0f; //distance between the camera and target positions
-	float yaw = -90.0f; //in degrees
+	float yaw = 0.0f; //in degrees
 	float pitch = 0.0f; //in degrees
 
 	/*Updates the position of the camera based on its yaw and pitch rotations.*/
