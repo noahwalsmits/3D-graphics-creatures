@@ -14,6 +14,7 @@ public:
 	void pollKeyboard(GLFWwindow* window) override;
 
 	const Camera& getCamera() const { return *this->camera; }
+	const glm::vec3 getPosition() const { return *this->position; }
 
 private:
 	static constexpr float MOVEMENT_SPEED = 5.0f;

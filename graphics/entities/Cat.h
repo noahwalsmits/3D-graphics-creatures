@@ -11,6 +11,7 @@ public:
 	void update(float deltaTime) override;
 
 private:
+	static constexpr float DETECTION_RANGE = 3.0f;
 	static constexpr float MOVEMENT_SPEED = 5.0f;
 
 	const Cucumber& player;

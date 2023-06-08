@@ -12,11 +12,11 @@ public:
 	void mouseMoved(float deltaX, float deltaY) override;
 	void pollKeyboard(GLFWwindow* window) override;
 
-	const float& getDistance() { return this->distance; }
+	const float& getDistance() const { return this->distance; }
 	void setDistance(const float& distance) { this->distance = distance; }
-	const float& getYaw() { return this->yaw; }
+	const float& getYaw() const { return this->yaw; }
 	void setYaw(const float& yaw) { this->yaw = yaw; }
-	const float& getPitch() { return this->pitch; }
+	const float& getPitch() const { return this->pitch; }
 	void setPitch(const float& pitch) { this->pitch = pitch; }
 
 private:
