@@ -36,8 +36,11 @@ void Cat::update(float deltaTime)
 
 	//gradually turn model towards desired rotation
 	float rotationDifference = this->desiredRotation - *this->currentRotation;
+	if (rotationDifference > 180.0f)
+		rotationDifference -= 360.0f;
+	else if (rotationDifference < -180.0f)
+		rotationDifference += 360.0f;
 	*this->currentRotation += rotationDifference * deltaTime;
-	//TODO find the shortest rotation
 	//TODO increase rotation speed
 
 	//move in desired direction
