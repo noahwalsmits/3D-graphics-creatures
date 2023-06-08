@@ -19,15 +19,28 @@ Cat::Cat(const glm::vec3& position, const Cucumber& player) : player(player), En
 
 void Cat::update(float deltaTime)
 {
+	this->movementSpeed = 0.0f;
+
+	//run away from the player
 	if (glm::distance(*this->position, this->player.getPosition()) < DETECTION_RANGE)
 	{
 		glm::mat4 rotation = glm::lookAt(*this->position, this->player.getPosition(), glm::vec3(0, 1, 0));
 		glm::vec3 angles = glm::degrees(glm::eulerAngles(glm::inverse(glm::quat_cast(rotation))));
-		*this->currentRotation = angles.y;
+		this->desiredRotation = angles.y;
 		if (std::fabs(angles.z) >= 90.0f)
 		{
-			*this->currentRotation = 180.0f - angles.y;
+			this->desiredRotation = 180.0f - angles.y;
 		}
-		//std::cout << angles.x << ", " << angles.y << ", " << angles.z << ", current: " << *this->currentRotation << std::endl;
+		this->movementSpeed = FLEEING_SPEED; //TODO base this on distance
 	}
+
+	//gradually turn model towards desired rotation
+	float rotationDifference = this->desiredRotation - *this->currentRotation;
+	*this->currentRotation += rotationDifference * deltaTime;
+	//TODO find the shortest rotation
+	//TODO increase rotation speed
+
+	//move in desired direction
+	this->position->z += cos(glm::radians(this->desiredRotation)) * deltaTime * this->movementSpeed;
+	this->position->x += sin(glm::radians(this->desiredRotation)) * deltaTime * this->movementSpeed;
 }

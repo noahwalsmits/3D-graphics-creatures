@@ -12,11 +12,11 @@ public:
 
 private:
 	static constexpr float DETECTION_RANGE = 3.0f;
-	static constexpr float MOVEMENT_SPEED = 5.0f;
+	static constexpr float FLEEING_SPEED = 3.0f;
 
 	const Cucumber& player;
 	std::shared_ptr<glm::vec3> position;
 	std::shared_ptr<float> currentRotation;
-
-	//float desiredRotation that it uses to move
+	float desiredRotation = 0.0f;
+	float movementSpeed = 0.0f;
 };
