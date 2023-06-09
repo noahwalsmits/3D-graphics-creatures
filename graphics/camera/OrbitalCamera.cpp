@@ -1,8 +1,11 @@
 #include "OrbitalCamera.h"
 #include <glm/gtc/matrix_transform.hpp>
 
-OrbitalCamera::OrbitalCamera(glm::vec3& target) : target(target), Camera()
+OrbitalCamera::OrbitalCamera(glm::vec3& target, const float& distance, const float& minPitch, const float& maxPitch) : target(target), Camera()
 {
+	this->distance = distance;
+	this->minPitch = minPitch;
+	this->maxPitch = maxPitch;
 	this->updateViewingAngle();
 }
 
@@ -17,13 +20,13 @@ void OrbitalCamera::mouseMoved(float deltaX, float deltaY)
 	this->yaw = remainderf(this->yaw, 360.0f);
 
 	this->pitch -= deltaY * this->MOUSE_SENSITIVITY;
-	if (pitch > this->MAX_PITCH)
+	if (pitch > this->maxPitch)
 	{
-		pitch = this->MAX_PITCH;
+		pitch = this->maxPitch;
 	}
-	if (pitch < this->MIN_PITCH)
+	if (pitch < this->minPitch)
 	{
-		pitch = this->MIN_PITCH;
+		pitch = this->minPitch;
 	}
 
 	this->updateViewingAngle();
