@@ -33,6 +33,7 @@ std::vector<Mesh*> ObjParser::parseModel(const std::string& assetPath) const
 	{
 		std::string line;
 		std::getline(objFile, line);
+		line = cleanLine(line);
 		std::vector<std::string> arguments = splitArguments(line, " ");
 		
 		if (arguments[0] == "v") //read position
@@ -94,6 +95,18 @@ std::vector<Mesh*> ObjParser::parseModel(const std::string& assetPath) const
 	}
 
 	return meshes;
+}
+
+std::string ObjParser::cleanLine(std::string line) const
+{
+	//trim trailing spaces and tabs
+	line.erase(line.find_last_not_of(" \t") + 1);
+	line.erase(0, line.find_first_not_of(" \t"));
+
+	//TODO turn "\t" into " "
+	//TODO turn "  " into " "
+	//TODO make it case insensitive?
+	return line;
 }
 
 std::vector<std::string> ObjParser::splitArguments(std::string line, const std::string& delimiter) const
@@ -163,6 +176,7 @@ void ObjParser::readMaterials(const std::string& filePath, std::vector<Material*
 	{
 		std::string line;
 		std::getline(mtlFile, line);
+		line = cleanLine(line);
 		std::vector<std::string> arguments = splitArguments(line, " ");
 
 		if (arguments[0] == "newmtl") //create new material

@@ -13,6 +13,8 @@ public:
 	std::vector<Mesh*> parseModel(const std::string& assetPath) const override;
 
 private:
+	std::string cleanLine(std::string line) const;
+
 	std::vector<std::string> splitArguments(std::string line, const std::string& delimiter) const;
 
 	/// <summary>
