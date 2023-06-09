@@ -114,8 +114,8 @@ void init()
 	controllables.push_back(player);
 	camera = &player->getCamera();
 
-	int catCount = 10;
-	float catSpawnRange = 10.0f;
+	int catCount = 50;
+	float catSpawnRange = 25.0f;
 	for (int i = 0; i < catCount; i++)
 	{
 		float spawnX = -catSpawnRange + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (2 * catSpawnRange)));

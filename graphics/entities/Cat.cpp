@@ -7,6 +7,17 @@ Cat::Cat(const glm::vec3& position, const Cucumber& player) : player(player), En
 	this->position = std::make_shared<glm::vec3>(position);
 	this->currentRotation = std::make_shared<float>(0.0f);
 
+	//find angle to face towards the player
+	glm::mat4 rotation = glm::lookAt(*this->position, this->player.getPosition(), glm::vec3(0, 1, 0));
+	glm::vec3 angles = glm::degrees(glm::eulerAngles(glm::inverse(glm::quat_cast(rotation))));
+	this->desiredRotation = angles.y;
+	if (std::fabs(angles.z) >= 90.0f)
+	{
+		this->desiredRotation = 180.0f - angles.y;
+	}
+	this->desiredRotation += 180.0f;
+	*this->currentRotation = this->desiredRotation;
+
 	//pick random model variation
 	switch (rand() % 2)
 	{
