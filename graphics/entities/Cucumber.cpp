@@ -4,7 +4,7 @@ Cucumber::Cucumber(const glm::vec3& position) : Entity(), Controllable()
 {
 	this->position = std::make_shared<glm::vec3>(position);
 	this->rotation = std::make_shared<float>(0.0f);
-	this->models.push_back(Model("Egg 1/kart_YS_b.obj", position));
+	this->models.push_back(Model("cucumber/Cucumber.obj", position));
 	this->camera = new OrbitalCamera(*this->position);
 
 	for (Model& model : this->models)
