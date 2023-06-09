@@ -96,8 +96,8 @@ void init()
 	tigl::shader->setLightPosition(0, glm::vec3(0.0f, 1.0f, 0.0f));
 
 	tigl::shader->setLightAmbient(0, glm::vec3(0.3f, 0.3f, 0.3f));
-	tigl::shader->setLightDiffuse(0, glm::vec3(0.6f, 0.6f, 0.6f));
-	tigl::shader->setLightSpecular(0, glm::vec3(0.6f, 0.6f, 0.6f));
+	tigl::shader->setLightDiffuse(0, glm::vec3(0.8f, 0.8f, 0.8f));
+	tigl::shader->setLightSpecular(0, glm::vec3(0.8f, 0.8f, 0.8f));
 	
 	//create scenery
 	sceneryModels.push_back(new Model("kitchenfloor/kitchenfloor.obj", glm::vec3(0.0f, 0.0f, 0.0f), 200.0f));
@@ -114,11 +114,12 @@ void init()
 	controllables.push_back(player);
 	camera = &player->getCamera();
 
-	float spawnRange = 10.0f;
-	for (int i = 0; i < 10; i++)
+	int catCount = 10;
+	float catSpawnRange = 10.0f;
+	for (int i = 0; i < catCount; i++)
 	{
-		float spawnX = -spawnRange + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (2 * spawnRange)));
-		float spawnZ = -spawnRange + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (2 * spawnRange)));
+		float spawnX = -catSpawnRange + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (2 * catSpawnRange)));
+		float spawnZ = -catSpawnRange + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (2 * catSpawnRange)));
 		gameEntities.push_back(new Cat(glm::vec3(spawnX, 0.0f, spawnZ), *player));
 	}
 
