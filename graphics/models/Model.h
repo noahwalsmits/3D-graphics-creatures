@@ -16,6 +16,7 @@ public:
 	std::shared_ptr<float> scale; //size to draw the model with
 
 	Model(const std::string& filePath, const glm::vec3& position);
+	Model(const std::string& filePath, const glm::vec3& position, const float& scale);
 
 	void draw(tigl::internal::Shader& shader) const;
 

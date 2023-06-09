@@ -67,7 +67,7 @@ std::vector<Mesh*> ObjParser::parseModel(const std::string& assetPath) const
 		else if (arguments[0] == "mtllib") //load material
 		{
 			std::string directoryPath = filePath.substr(0, filePath.find_last_of("/"));
-			readMaterials(directoryPath + "/" + arguments[1], loadedMaterials);
+			readMaterials(directoryPath + "/" + arguments[1], loadedMaterials); //TODO support spaces in path
 		}
 		else if (arguments[0] == "usemtl") //use material
 		{

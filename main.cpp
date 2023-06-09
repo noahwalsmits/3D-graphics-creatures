@@ -83,9 +83,9 @@ void init()
 	tigl::shader->enableTexture(true);
 
 	//set up fog
-	glm::vec3 backgroundcolor = glm::vec3(0.3f, 0.4f, 0.6f);
+	glm::vec3 backgroundcolor = glm::vec3(0.9f, 0.9f, 0.9f);
 	tigl::shader->enableFog(true);
-	tigl::shader->setFogExp2(0.1f);
+	tigl::shader->setFogLinear(25.0f, 40.0f);
 	tigl::shader->setFogColor(backgroundcolor);
 	glClearColor(backgroundcolor.r, backgroundcolor.g, backgroundcolor.b, 1.0f);
 
@@ -100,9 +100,13 @@ void init()
 	tigl::shader->setLightSpecular(0, glm::vec3(0.6f, 0.6f, 0.6f));
 	
 	//create scenery
-	Model* floor = new Model("kitchenfloor/kitchenfloor.obj", glm::vec3(0.0f, 0.0f, 0.0f));
-	*floor->scale = 100.0f;
-	sceneryModels.push_back(floor);
+	sceneryModels.push_back(new Model("kitchenfloor/kitchenfloor.obj", glm::vec3(0.0f, 0.0f, 0.0f), 200.0f));
+	sceneryModels.push_back(new Model("fridge/Fridge.obj", glm::vec3(2.0f, 0.0f, 6.0f), 0.05f));
+
+	sceneryModels.push_back(new Model("orange/Orange.obj", glm::vec3(0.5f, 0.0f, 1.25f), 5.0f));
+	sceneryModels.push_back(new Model("apple/Apple.obj", glm::vec3(1.0f, 0.0f, 0.5f), 5.0f));
+	sceneryModels.push_back(new Model("shrimp/Shrimp.obj", glm::vec3(-1.0f, 0.0f, 0.6f), 5.0f));
+	sceneryModels.push_back(new Model("salmon/Grilled_Salmon.obj", glm::vec3(-0.5f, 0.0f, 1.7f), 5.0f));
 
 	//create entities
 	Cucumber* player = new Cucumber(glm::vec3(0.0f, 0.0f, 0.0f));

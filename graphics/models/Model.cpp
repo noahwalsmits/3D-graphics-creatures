@@ -13,6 +13,11 @@ Model::Model(const std::string& filePath, const glm::vec3& position)
 	this->scale = std::make_shared <float>(1.0f);
 }
 
+Model::Model(const std::string& filePath, const glm::vec3& position, const float& scale) : Model(filePath, position)
+{
+	*this->scale = scale;
+}
+
 void Model::draw(tigl::internal::Shader& shader) const
 {
 	//move model
