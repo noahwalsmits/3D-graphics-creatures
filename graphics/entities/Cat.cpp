@@ -8,12 +8,14 @@ Cat::Cat(const glm::vec3& position, const Cucumber& player) : player(player), En
 {
 	this->position = std::make_shared<glm::vec3>(position);
 	this->currentRotation = std::make_shared<float>(0.0f);
-	this->models.push_back(Model("Egg 1/kart_YS_b.obj", position));
+	this->models.push_back(Model("cat_orange/12221_Cat_v1_l3.obj", position));
 
 	for (Model& model : this->models)
 	{
 		model.position = this->position;
 		model.rotationYaw = this->currentRotation;
+		*model.scale = 0.05f;
+		*model.rotationPitch = -90.0f;
 	}
 }
 
