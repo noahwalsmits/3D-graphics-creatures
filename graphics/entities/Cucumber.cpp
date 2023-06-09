@@ -11,6 +11,7 @@ Cucumber::Cucumber(const glm::vec3& position) : Entity(), Controllable()
 	{
 		model.position = this->position;
 		model.rotationYaw = this->rotation;
+		*model.scale = 5.0f;
 	}
 }
 

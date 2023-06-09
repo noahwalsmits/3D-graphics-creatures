@@ -2,13 +2,21 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <lib/glm/glm/gtc/quaternion.hpp>
 
-#include <iostream>
-
 Cat::Cat(const glm::vec3& position, const Cucumber& player) : player(player), Entity()
 {
 	this->position = std::make_shared<glm::vec3>(position);
 	this->currentRotation = std::make_shared<float>(0.0f);
-	this->models.push_back(Model("cat_orange/12221_Cat_v1_l3.obj", position));
+
+	//pick random model variation
+	switch (rand() % 2)
+	{
+	case 0:
+		this->models.push_back(Model("cat_orange/12221_Cat_v1_l3.obj", position));
+		break;
+	case 1:
+		this->models.push_back(Model("cat_black/12222_Cat_v1_l3.obj", position));
+		break;
+	}
 
 	for (Model& model : this->models)
 	{
