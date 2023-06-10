@@ -9,7 +9,6 @@
 #include <graphics/entities/Entity.h>
 #include <graphics/entities/Cucumber.h>
 #include <graphics/entities/Cat.h>
-using tigl::Vertex;
 
 #pragma comment(lib, "glfw3.lib")
 #pragma comment(lib, "glew32s.lib")
@@ -35,7 +34,7 @@ int main(void)
 {
 	if (!glfwInit())
 		throw "Could not initialize glwf";
-	window = glfwCreateWindow(1400, 800, "Hello World", NULL, NULL);
+	window = glfwCreateWindow(1400, 800, "Fridge Heist", NULL, NULL);
 	if (!window)
 	{
 		glfwTerminate();
@@ -122,17 +121,6 @@ void init()
 		float spawnZ = -catSpawnRange + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (2 * catSpawnRange)));
 		gameEntities.push_back(new Cat(glm::vec3(spawnX, 0.0f, spawnZ), *player));
 	}
-
-	//set up controllables
-	//OrbitalCamera* orbitalCamera = new OrbitalCamera(glm::vec3(0.0f, 0.0f, 0.0f));
-	//camera = orbitalCamera;
-	//controllables.push_back(orbitalCamera);
-
-	/*TEST CODE*/
-	//tigl::shader->enableColor(true);
-	//sceneryModels.push_back(new Model("Egg 1/kart_YS_b.obj", glm::vec3(-1.0f, 0.0f, 0.0f)));
-	//sceneryModels.push_back(new Model("scarecrow/scarecrow.obj", glm::vec3(0.0f, -6.0f, 0.0f)));
-	//sceneryModels.push_back(new Model("Egg 1/kart_YS_b.obj", glm::vec3(1.0f, 0.0f, 0.0f)));
 }
 
 
