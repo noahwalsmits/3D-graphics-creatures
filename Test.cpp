@@ -45,4 +45,13 @@ BOOST_FIXTURE_TEST_CASE(modelLoaderMissingModel, OpenglFixture)
 	}
 }
 
-//TODO load model twice and check if meshgroups are equal
+BOOST_FIXTURE_TEST_CASE(modelLoaderMultipleModelsOfSamePath, OpenglFixture)
+{
+	ModelLoader modelLoader = ModelLoader();
+	std::shared_ptr<MeshGroup> group1 = modelLoader.loadModel("apple/Apple.obj");
+	std::shared_ptr<MeshGroup> group2 = modelLoader.loadModel("apple/Apple.obj");
+	BOOST_CHECK_EQUAL(group1, group2, "loading the same model twice did not return the same MeshGroup");
+
+	std::shared_ptr<MeshGroup> group3 = modelLoader.loadModel("orange/Orange.obj");
+	BOOST_CHECK_NE(group1, group3, "loading a different model returned the same MeshGroup");
+}
