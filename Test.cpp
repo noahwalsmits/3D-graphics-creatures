@@ -33,15 +33,19 @@ struct OpenglFixture {
 
 BOOST_FIXTURE_TEST_CASE(modelLoaderMissingModel, OpenglFixture)
 {
+	std::ofstream outputFile("testresults.txt"); //clear results file
+	outputFile << "1. loading missing model: ";
+
 	ModelLoader modelLoader = ModelLoader();
 	try 
 	{
 		modelLoader.loadModel("does_not_exist.obj");
 		BOOST_TEST(false, "loading invalid model did not throw an exception");
+		outputFile << "FAILED" << std::endl;
 	}
 	catch (std::exception exception)
 	{
-		
+		outputFile << "PASSED" << std::endl;
 	}
 }
 
@@ -54,4 +58,15 @@ BOOST_FIXTURE_TEST_CASE(modelLoaderMultipleModelsOfSamePath, OpenglFixture)
 
 	std::shared_ptr<MeshGroup> group3 = modelLoader.loadModel("orange/Orange.obj");
 	BOOST_CHECK_NE(group1, group3, "loading a different model returned the same MeshGroup");
+
+	std::ofstream outputFile("testresults.txt", std::fstream::app);
+	outputFile << "2. loading models of same path: ";
+	if (group1 == group2 && group1 != group3)
+	{
+		outputFile << "PASSED" << std::endl;
+	}
+	else
+	{
+		outputFile << "FAILED" << std::endl;
+	}
 }
