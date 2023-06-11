@@ -9,31 +9,30 @@
 #pragma comment(lib, "glew32s.lib")
 #pragma comment(lib, "opengl32.lib")
 
-struct Fixture {
-	Fixture()
+struct OpenglFixture {
+	OpenglFixture()
 	{
+		if (!glfwInit())
+			throw "Could not initialize glwf";
+		GLFWwindow* window = glfwCreateWindow(200, 100, "Unit tests", NULL, NULL);
+		if (!window)
+		{
+			glfwTerminate();
+			throw "Could not initialize glwf";
+		}
+		glfwMakeContextCurrent(window);
 
+		tigl::init();
 	}
-	~Fixture()
-	{
 
+	~OpenglFixture()
+	{
+		glfwTerminate();
 	}
 };
 
-BOOST_AUTO_TEST_CASE(modelLoaderMissingModel)
+BOOST_FIXTURE_TEST_CASE(modelLoaderMissingModel, OpenglFixture)
 {
-	if (!glfwInit())
-		throw "Could not initialize glwf";
-	GLFWwindow* window = glfwCreateWindow(200, 100, "Unit tests", NULL, NULL);
-	if (!window)
-	{
-		glfwTerminate();
-		throw "Could not initialize glwf";
-	}
-	glfwMakeContextCurrent(window);
-
-	tigl::init();
-
 	ModelLoader modelLoader = ModelLoader();
 	try 
 	{
@@ -44,8 +43,6 @@ BOOST_AUTO_TEST_CASE(modelLoaderMissingModel)
 	{
 		
 	}
-
-	glfwTerminate();
 }
 
 //TODO load model twice and check if meshgroups are equal
